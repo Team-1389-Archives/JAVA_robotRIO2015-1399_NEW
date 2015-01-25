@@ -7,12 +7,17 @@ public class DriveComponent extends Component{
 	Talon RBDrive;
 	Talon LFDrive;
 	Talon LBDrive;
-	final boolean encoderVerified=false;
+	double leftCoef;
+	double rightCoef;
+	
+	final boolean encoderVerified=true;
 	final AssistedRampUp rampUpState=AssistedRampUp.COMPUTER_ASSISTED;
 
 	double actualLeft = 0, actualRight = 0;
 
 	public DriveComponent() {
+		leftCoef=1;
+		rightCoef=1;
 		componentType="Drive";
 		RFDrive = new Talon(Constants.RF_PWM_DRIVE);
 		RBDrive = new Talon(Constants.RB_PWM_DRIVE);
@@ -24,7 +29,7 @@ public class DriveComponent extends Component{
 		
 		double leftPower=(y + x) / Constants.LIMITER;
 		double rightPower=(y - x) / Constants.LIMITER * -1;
-		
+
 		if(rampUpState==AssistedRampUp.COMPUTER_ASSISTED){
 			actualLeft=AssistedPowerControl(leftPower,actualLeft);
 			actualRight=AssistedPowerControl(rightPower,actualRight);
@@ -37,11 +42,18 @@ public class DriveComponent extends Component{
 			actualLeft=leftPower;
 			actualRight=rightPower;
 		}
-
+		
 		LFDrive.set(actualLeft);
 		LBDrive.set(actualLeft);
 		RFDrive.set(actualRight);
 		RBDrive.set(actualRight);
+		
+		if(encoderVerified){
+			VerifyVelocity(leftPower, rightPower, Robot.state.encoder1, Robot.state.encoder2);
+			leftPower*=leftCoef;
+			rightPower*=rightCoef;
+		}
+		
 		SmartDashboard.putNumber("Power", (double)((int)(100*((actualLeft + actualRight) / 2)))/100);
 	}
 	
@@ -81,4 +93,18 @@ public class DriveComponent extends Component{
 		}
 		return actualPower;
 	}
+ 	private void VerifyVelocity(double leftVel, double rightVel,
+ 			Encoder encoder1, Encoder encoder2) {
+ 		final double multiplier=1;
+ 		double error=(leftVel/rightVel)-(encoder1.getRate()/encoder2.getRate());
+ 		if(error>0){//turning desired direction too fast
+ 			leftCoef*=Math.abs(error)*multiplier;
+ 			rightCoef/=Math.abs(error)*multiplier;
+ 		}
+ 		else if(error<0){//turning desired direction too slow
+ 			leftCoef/=Math.abs(error)*multiplier;
+ 			rightCoef*=Math.abs(error)*multiplier;
+ 		}
+ 	}
+ 
 }

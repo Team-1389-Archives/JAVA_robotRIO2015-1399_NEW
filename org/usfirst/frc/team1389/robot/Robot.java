@@ -23,11 +23,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	//instance variables
 	Component[] components;
-	Control state;
+	public static InputState state;
+	private Control control;
 	
 	/**Instantiates all component objects and input state
 	 */
 	public Robot(){
+		state=new InputState();
 		components = new Component[2];
 		components[Component.DRIVE]=new DriveComponent();
 		components[Component.ELEVATOR]=new ElevatorComponent();
@@ -39,7 +41,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopInit(){
-		state=new TeleopControl(components);
+		control=new TeleopControl(components);
 	}
 	
 	
@@ -50,5 +52,9 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() //Called about 50 times per second
 	{
 		state.tick();
+		control.tick();
+	}
+	public void teleopContinuous(){
+		
 	}
 }

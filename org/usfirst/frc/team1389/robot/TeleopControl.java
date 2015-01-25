@@ -11,10 +11,10 @@ public class TeleopControl extends Control{
 		this.components=components;
 	}
 	public void tick(){
-		displayInfared(infared);
+		displayInfared(Robot.state.infared);
 		DriveComponent driver=(DriveComponent)components[Component.DRIVE];
-		double x = drive.getLeftX()*(invertedX?1:-1);
-		double y = drive.getLeftY()*(invertedY?1:-1);
+		double x = Robot.state.drive.getLeftX()*(invertedX?1:-1);
+		double y = Robot.state.drive.getLeftY()*(invertedY?1:-1);
 		driver.drive(x,y);
 	}
 	private void displayInfared(DigitalInput[] sensors) {
@@ -22,4 +22,5 @@ public class TeleopControl extends Control{
 			SmartDashboard.putBoolean("IR "+x, sensors[x].get());
 		}
 	}
+	
 }
