@@ -11,7 +11,11 @@ public class ElevatorComponent extends Component{
 	//Our IR sensors output low when an object is within 2cm - 10cm of an object (e. g. !IRa.get() equates to true when there is an object in front of sensor one) 
 	//Sense stores the boolean returns of each IR sensor, updating each tick. Last sense is the same as sense,
 	//but values only update when a IR sensor is passed
-	
+	/**
+ 	* 
+ 	* @param loc level to go to
+ 	* @param sensors array of infared sensors
+	*/
 	public void goTo(int loc,DigitalInput[] sensors){
 		int lastSensor=0;
 		for(int d=0;d<sensors.length;d++){
@@ -33,12 +37,12 @@ public class ElevatorComponent extends Component{
 		elevator.set(dir*Constants.ELEVATOR_SPEED_MOD);
 	}
 
-/** 
- * When input is given to bring the elevator to a specified level, this function provides the direction necessary to do so.
- * @param senseID represents the desired elevator level (Integers 0 - 4)
- * @param saves last triggered infared sensor(last known location of elevator)
- * @return +/- direction to reach desired level
- */
+	/** 
+	* When input is given to bring the elevator to a specified level, this function provides the direction necessary to do so.
+	* @param senseID represents the desired elevator level (Integers 0 - 4)
+	* @param saves last triggered infared sensor(last known location of elevator)
+	* @return +/- direction to reach desired level
+	*/
 	public int whereToGo(int senseID, int lastSensor)
 	{
 		if (lastSensor > senseID){ //above the requested spot
@@ -52,5 +56,4 @@ public class ElevatorComponent extends Component{
 		}
 
 	}	
-
 }
