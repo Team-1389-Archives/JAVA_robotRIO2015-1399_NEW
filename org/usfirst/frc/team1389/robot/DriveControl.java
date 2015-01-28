@@ -13,8 +13,6 @@ public class DriveControl extends Component{
 	int rightCoef;
 	int leftCoef;
 	
-	double lastRight = 0, lastLeft = 0;
-	
 	public DriveControl() {
 		rightCoef=1;
 		leftCoef=1;
@@ -34,7 +32,6 @@ public class DriveControl extends Component{
 	/**
 	 * Teleoperated control for the drive train
 	 */
-	
 	@Override
 	public void teleopTick(InputState state)
 	{
@@ -47,23 +44,15 @@ public class DriveControl extends Component{
 			//SmartDashboard.putNumber("Left Power", (y + x) / Constants.LIMITER);
 		//	SmartDashboard.putNumber("Right Power", (y - x) / Constants.LIMITER);
 		//x += selfTurn(state);
-		double leftPower=leftCoef*(y + x) / Constants.LIMITER;
-		double rightPower=rightCoef*(y - x) / Constants.LIMITER * -1;
-		if (state.getDrive().isButtonA() && Math.abs(state.getAccelerometer().getX()) > Constants.MAX_ACCELERATION){
-			lastLeft *= .9;
-			lastRight *= .9;
-		}else{
-			lastLeft = leftPower;
-			lastRight = rightPower;
-		}
-		LFDrive.set(lastLeft);
-		LBDrive.set(lastLeft);
-		RFDrive.set(lastRight);
-		RBDrive.set(lastRight);
-		SmartDashboard.putNumber("Left Power", leftPower);
-		SmartDashboard.putNumber("Right Power", rightPower);
+		double leftVel=leftCoef*(y + x) / Constants.LIMITER;
+		double rightVel=rightCoef*(y - x) / Constants.LIMITER * -1;
+		SmartDashboard.putNumber("Left Power", leftVel);
+		SmartDashboard.putNumber("Right Power", rightVel);
 		//VerifyVelocity(leftVel,rightVel,state.getEncoder1(),state.getEncoder2());
-
+		LFDrive.set(leftVel);
+		LBDrive.set(leftVel);
+		RFDrive.set(rightVel);
+		RBDrive.set(rightVel);
 	}
 
 	private void VerifyVelocity(double leftVel, double rightVel,

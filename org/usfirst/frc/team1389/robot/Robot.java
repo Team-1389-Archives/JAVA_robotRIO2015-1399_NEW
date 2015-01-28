@@ -49,8 +49,8 @@ public class Robot extends SampleRobot {
 		}
 		while (isOperatorControl())
 		{
+			SmartDashboard.putBoolean("ticking", true);
 			state.tick();
-			SmartDashboard.putNumber("acceleration:",state.getAccelerometer().getX());
 			for (Component c: components){
 				c.teleopTick(state);
 			}
