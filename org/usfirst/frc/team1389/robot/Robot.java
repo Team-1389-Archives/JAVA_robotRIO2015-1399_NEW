@@ -2,7 +2,6 @@ package org.usfirst.frc.team1389.robot;
 
 import java.util.ArrayList;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -52,7 +51,6 @@ public class Robot extends SampleRobot {
 		{
 			state.tick();
 			SmartDashboard.putNumber("acceleration:",state.getAccelerometer().getX());
-			//SmartDashboard.putBoolean("dig 0", new DigitalInput(0).get());
 			for (Component c: components){
 				c.teleopTick(state);
 			}

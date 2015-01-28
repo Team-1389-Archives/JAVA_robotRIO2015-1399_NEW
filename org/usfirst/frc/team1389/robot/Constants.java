@@ -22,7 +22,6 @@ package org.usfirst.frc.team1389.robot;
 public class Constants {
 	
 	static final double MAX_ACCELERATION   = 0.2;
-	static final double PERCENT_POWER_CHANGE = 0.01;
 	
 	//Joystick input values
 	static final int ButtonX 			  = 3; // XBox Controller X Button number for getRawButton= or getRawAxis=
