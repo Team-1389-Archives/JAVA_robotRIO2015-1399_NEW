@@ -25,7 +25,7 @@ public class DriveControl extends Component{
 		LBDrive = new Talon(Constants.LB_PWM_DRIVE);
 	}	
 
-	public void drive(double x,double y, InputState state){
+	public void drive(double x,double y){
 
 		double leftPower=(y + x) / Constants.LIMITER;
 		double rightPower=(y - x) / Constants.LIMITER * -1;
@@ -49,7 +49,7 @@ public class DriveControl extends Component{
 		RBDrive.set(actualRight);
 
 		if(encoderVerified){
-			VerifyVelocity(leftPower, rightPower, state.getEncoder1(), state.getEncoder2());
+			VerifyVelocity(leftPower, rightPower, Robot.state.encoder1, Robot.state.encoder2);
 			leftPower*=leftCoef;
 			rightPower*=rightCoef;
 		}
@@ -114,10 +114,9 @@ public class DriveControl extends Component{
 	 * Teleoperated control for the drive train
 	 */
 	@Override
-	public void teleopTick(InputState state)
+	public void teleopTick()
 	{
-		VerifyVelocity(leftVel, rightVel, encoder1, encoder2);
-		drive(state.getDrive().getLeftX(), state.getDrive().getLeftY(),state);//TODO 
+		drive(Robot.state.drive.getLeftX(), Robot.state.drive.getLeftY() * -1);//TODO 
 	}
 	/**
 	 * Drive train Autonomous setup

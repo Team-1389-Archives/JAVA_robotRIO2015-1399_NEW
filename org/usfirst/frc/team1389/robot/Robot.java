@@ -20,7 +20,7 @@ public class Robot extends SampleRobot {
 	
 	//instance variables
 	ArrayList<Component> components;
-	InputState state;
+	static InputState state = new InputState();
 	
 	
 	/**
@@ -29,10 +29,7 @@ public class Robot extends SampleRobot {
 	 */
 	public Robot()
 	{
-		
 		components = new ArrayList<Component>();
-		
-		state = new InputState();
 		components.add(new DriveControl());
 		components.add(new ElevatorControl());
 	}
@@ -56,7 +53,7 @@ public class Robot extends SampleRobot {
 			
 			
 			for (Component c: components){
-				c.teleopTick(state);
+				c.teleopTick();
 			}
 		}
 		

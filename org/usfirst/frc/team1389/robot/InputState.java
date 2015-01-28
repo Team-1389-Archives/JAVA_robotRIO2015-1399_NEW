@@ -7,22 +7,21 @@ import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Timer;
 
 public class InputState implements Cloneable{
-	private XBoxController drive;
-	private XBoxController manip;
+	public XBoxController drive;
+	public XBoxController manip;
 	
-	private Encoder encoder1;
-	private Encoder encoder2;
+	public Encoder encoder1;
+	public Encoder encoder2;
 	
-	private AnalogAccelerometer accel;
-	private Gyro gyro;
+	public AnalogAccelerometer accel;
+	public Gyro gyro;
 	
-	private DigitalInput limit1;
-	private DigitalInput limit2;
+	public DigitalInput limit1;
+	public DigitalInput limit2;
 	
-	static Timer time;
+	public Timer time;
 	
-	
-	private DigitalInput[] infared;
+	public DigitalInput[] infared;
 	
 	public InputState(){
 		
@@ -59,35 +58,6 @@ public class InputState implements Cloneable{
 	        newState.manip = manip.clone();
 	        return newState;
 	 }
-	 
-
-	public DigitalInput[] getInfared() {
-		return infared;
-	}
-
-	public DigitalInput getLimit1() {
-		return limit1;
-	}
-
-	public DigitalInput getLimit2() {
-		return limit2;
-	}
-
-	public XBoxController getDrive() {
-		return drive;
-	}
-
-	public XBoxController getManip() {
-		return manip;
-	}
-
-	public Encoder getEncoder1() {
-		return encoder1;
-	}
-
-	public Encoder getEncoder2() {
-		return encoder2;
-	}
 	 
 
 }

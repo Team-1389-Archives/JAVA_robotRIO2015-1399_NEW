@@ -11,12 +11,12 @@ public class ElevatorControl extends Component{
 	public void teleopConfig(){
 	}
 	public void teleopTick(InputState state){
-		DigitalInput[] sensors=state.getInfared();
+		DigitalInput[] sensors= Robot.state.infared;
 		int lastSensor=0;
 		for(int d=0;d<sensors.length;d++){
 			if(!sensors[d].get())lastSensor=d;
-		}
-		SmartDashboard.putBoolean("IR One value", state.getInfared()[0].get());
+		} 
+		SmartDashboard.putBoolean("IR One value", Robot.state.infared[0].get());
 	}
 
 	

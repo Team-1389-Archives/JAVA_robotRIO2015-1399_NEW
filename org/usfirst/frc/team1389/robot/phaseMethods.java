@@ -6,6 +6,6 @@ public interface phaseMethods {
 	public void autonConfig();
 	public void autonTick();
 	public void teleopConfig();
-	public void teleopTick(InputState state);
+	public void teleopTick();
 
 }

@@ -25,7 +25,7 @@ public class Component implements phaseMethods{
 	}
 
 	@Override
-	public void teleopTick(InputState state) {
+	public void teleopTick() {
 		
 	}
 	
