@@ -16,7 +16,6 @@ public class ElevatorControl extends Component{
 	}
 	public void teleopTick(InputState state){
 		DigitalInput[] sensors=state.getInfared();
-		displayInfared(sensors);
 		int lastSensor=0;
 		for(int d=0;d<sensors.length;d++){
 			if(!sensors[d].get())lastSensor=d;
@@ -26,11 +25,6 @@ public class ElevatorControl extends Component{
 	}
 
 
-	private void displayInfared(DigitalInput[] sensors) {
-		for(int x=0;x<sensors.length; x++){
-			SmartDashboard.putBoolean("IR "+x, sensors[x].get());
-		}
-	}
 /** 
  * When input is given to bring the elevator to a specified level, this function provides the direction necessary to do so.
  * @param senseID represents the desired level you want to go to (Integers 0 - 4)

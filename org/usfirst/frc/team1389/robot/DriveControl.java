@@ -38,31 +38,54 @@ public class DriveControl extends Component{
 	@Override
 	public void teleopTick(InputState state)
 	{
+		SmartDashboard.putBoolean("Drive ticking", true);
 		double x = state.getDrive().getLeftX()*(invertedX?1:-1);
 		double y = state.getDrive().getLeftY()*(invertedY?1:-1);
-		x += selfTurn(state);
+		//Debug
+		SmartDashboard.putNumber("Driver LeftX", x);
+		SmartDashboard.putNumber("Driver LeftY", y);
+		//SmartDashboard.putNumber("Left Power", (y + x) / Constants.LIMITER);
+		//	SmartDashboard.putNumber("Right Power", (y - x) / Constants.LIMITER);
+		//x += selfTurn(state);
 		double leftPower=leftCoef*(y + x) / Constants.LIMITER;
 		double rightPower=rightCoef*(y - x) / Constants.LIMITER * -1;
-
-		actualLeft=setPower(leftPower,actualLeft);
-		actualRight=setPower(rightPower,actualRight);
+		/*if (state.getDrive().isButtonA() && Math.abs(state.getAccelerometer().getX()) > Constants.MAX_ACCELERATION){
+			if (state.getAccelerometer().getX() > 0){
+				lastLeft *= .5;
+				lastRight *= .5;
+			} else {
+				lastLeft /= .5;
+				lastRight /= .5;
+			}
+		}else{
+			lastLeft = leftPower;
+			lastRight = rightPower;
+		}*/
+		double proportionalChange = Constants.PERCENT_POWER_CHANGE * Math.abs(leftPower - actualLeft);
+		if (leftPower > actualLeft + proportionalChange){
+			actualLeft += proportionalChange;
+		} else if (leftPower < actualLeft - proportionalChange){
+			actualLeft -= proportionalChange;
+		} else {
+			actualLeft = leftPower;
+		}
+		
+		proportionalChange = Constants.PERCENT_POWER_CHANGE * Math.abs(rightPower - actualRight);
+		if (rightPower > actualRight + proportionalChange){
+			actualRight += proportionalChange;
+		} else if (rightPower < actualRight - proportionalChange){
+			actualRight -= proportionalChange;
+		} else {
+			actualRight = rightPower;
+		}
 		LFDrive.set(actualLeft);
 		LBDrive.set(actualLeft);
 		RFDrive.set(actualRight);
 		RBDrive.set(actualRight);
-		SmartDashboard.putNumber("Power", (double)((int)(100*((actualLeft + actualRight) / 2)))/100);
-		//VerifyVelocity(actualLeft,actualRight,state.getEncoder1(),state.getEncoder2());
-	}
-	private double setPower(double Power, double actualPower){
-		double proportionalChange = Constants.PERCENT_POWER_CHANGE * Math.abs(Power - actualPower);
-		if (Power > actualPower + proportionalChange){
-			actualPower += proportionalChange;
-		} else if (Power < actualPower - proportionalChange){
-			actualPower-= proportionalChange;
-		} else {
-			actualPower = Power;
-		}
-		return actualPower;
+		SmartDashboard.putNumber("Left Power", leftPower);
+		SmartDashboard.putNumber("Right Power", rightPower);
+		//VerifyVelocity(leftVel,rightVel,state.getEncoder1(),state.getEncoder2());
+
 	}
 
 	private void VerifyVelocity(double leftVel, double rightVel,
