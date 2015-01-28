@@ -26,7 +26,7 @@ public class InputState implements Cloneable{
 		manip = new XBoxController(Constants.MANIP_JOY);
 		
 		encoder1 = new Encoder(Constants.ENCODER_1A,Constants.ENCODER_1B);
-		encoder2 = new Encoder(Constants.ENCODER_2A,Constants.ENCODER_2B);
+		encoder1 = new Encoder(Constants.ENCODER_2A,Constants.ENCODER_2B);
 		
 		limit1 = new DigitalInput(Constants.LIMIT_ONE);
 		limit2 = new DigitalInput(Constants.LIMIT_TWO);

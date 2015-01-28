@@ -10,8 +10,8 @@ public class DriveControl extends Component{
 	Talon RBDrive;
 	Talon LFDrive;
 	Talon LBDrive;
-	double rightCoef;
-	double leftCoef;
+	int rightCoef;
+	int leftCoef;
 
 	double actualLeft = 0, actualRight = 0;
 
@@ -40,11 +40,10 @@ public class DriveControl extends Component{
 	{
 		double x = state.getDrive().getLeftX()*(invertedX?1:-1);
 		double y = state.getDrive().getLeftY()*(invertedY?1:-1);
-		double leftPower=(y + x) / Constants.LIMITER;
-		double rightPower=(y - x) / Constants.LIMITER * -1;
-		VerifyVelocity(actualLeft,actualRight,state);
-		actualLeft*=leftCoef;
-		actualRight*=rightCoef;
+		x += selfTurn(state);
+		double leftPower=leftCoef*(y + x) / Constants.LIMITER;
+		double rightPower=rightCoef*(y - x) / Constants.LIMITER * -1;
+
 		actualLeft=setPower(leftPower,actualLeft);
 		actualRight=setPower(rightPower,actualRight);
 		LFDrive.set(actualLeft);
@@ -52,7 +51,7 @@ public class DriveControl extends Component{
 		RFDrive.set(actualRight);
 		RBDrive.set(actualRight);
 		SmartDashboard.putNumber("Power", (double)((int)(100*((actualLeft + actualRight) / 2)))/100);
-
+		//VerifyVelocity(actualLeft,actualRight,state.getEncoder1(),state.getEncoder2());
 	}
 	private double setPower(double Power, double actualPower){
 		double proportionalChange = Constants.PERCENT_POWER_CHANGE * Math.abs(Power - actualPower);
@@ -66,23 +65,11 @@ public class DriveControl extends Component{
 		return actualPower;
 	}
 
-	private void VerifyVelocity(double leftVel, double rightVel,InputState state) {
-		Encoder encoder1=state.getEncoder1();
-		Encoder encoder2=state.getEncoder2();
-		double multiplier=.01;
-		
- 		SmartDashboard.putNumber("LeftCoef", leftCoef);
- 		SmartDashboard.putNumber("RightCoef",rightCoef);
-		if((leftVel/rightVel)>(encoder1.getRate()/encoder2.getRate())){
-			leftCoef+=multiplier*(Math.abs(leftVel)/leftVel);
-			rightCoef-=multiplier*(Math.abs(rightVel)/rightVel);
-		}else if((leftVel/rightVel)<(encoder1.getRate()/encoder2.getRate())){
-			leftCoef-=multiplier*(Math.abs(leftVel)/leftVel);
-			rightCoef+=multiplier*(Math.abs(rightVel)/rightVel);
-		}
-		
-
- 	}
+	private void VerifyVelocity(double leftVel, double rightVel,
+			Encoder encoder1, Encoder encoder2) {
+		leftCoef-=(leftVel/rightVel)-(encoder1.getRate()/encoder2.getRate());
+		rightCoef+=(leftVel/rightVel)-(encoder1.getRate()/encoder2.getRate());
+	}
 
 	public double selfTurn(InputState state)
 	{
