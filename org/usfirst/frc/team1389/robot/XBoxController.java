@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1389.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class XBoxController implements Cloneable{
 	private Joystick stick;

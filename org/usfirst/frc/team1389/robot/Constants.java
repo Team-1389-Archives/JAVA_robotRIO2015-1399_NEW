@@ -20,7 +20,7 @@ package org.usfirst.frc.team1389.robot;
  */
 
 public class Constants {
-		
+	
 	//Joystick input values
 	static final int ButtonX 			  = 3; // XBox Controller X Button number for getRawButton= or getRawAxis=
 	static final int ButtonA			  = 1; // XBox Controller A Button number

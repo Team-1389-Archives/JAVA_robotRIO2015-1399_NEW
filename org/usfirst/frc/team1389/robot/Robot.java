@@ -2,7 +2,6 @@ package org.usfirst.frc.team1389.robot;
 
 import java.util.ArrayList;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -22,7 +21,8 @@ public class Robot extends SampleRobot {
 	//instance variables
 	ArrayList<Component> components;
 	InputState state;
-		
+	
+	
 	/**
 	 * Instantiates all static motors and sensors. 
 	 * Instantiates all component objects
@@ -31,10 +31,10 @@ public class Robot extends SampleRobot {
 	{
 		
 		components = new ArrayList<Component>();
+		
 		state = new InputState();
 		components.add(new DriveControl());
 		components.add(new ElevatorControl());
-		SmartDashboard.putString("components:", components.toString());
 	}
 	
 	
@@ -49,8 +49,11 @@ public class Robot extends SampleRobot {
 		}
 		while (isOperatorControl())
 		{
-			SmartDashboard.putBoolean("ticking", true);
+			
 			state.tick();
+			if(state.getDrive().isButtonY())
+				
+			
 			for (Component c: components){
 				c.teleopTick(state);
 			}

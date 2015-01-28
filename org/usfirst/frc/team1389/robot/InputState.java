@@ -1,9 +1,7 @@
 package org.usfirst.frc.team1389.robot;
 
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 
 public class InputState implements Cloneable{
 	private XBoxController drive;
@@ -12,8 +10,6 @@ public class InputState implements Cloneable{
 	private Encoder encoder1;
 	private Encoder encoder2;
 	
-	private Accelerometer accelerometer;
-	
 	private DigitalInput limit1;
 	private DigitalInput limit2;
 	
@@ -21,7 +17,6 @@ public class InputState implements Cloneable{
 	private DigitalInput[] infared;
 	
 	public InputState(){
-		accelerometer= new BuiltInAccelerometer();
 		drive = new XBoxController(Constants.DRIVE_JOY);
 		manip = new XBoxController(Constants.MANIP_JOY);
 		

@@ -1,9 +1,7 @@
 package org.usfirst.frc.team1389.robot;
 
 public class Component implements phaseMethods{
-	
-	protected String componentType;
-	
+
 	@Override
 	public void test() {
 	}
@@ -29,9 +27,6 @@ public class Component implements phaseMethods{
 	@Override
 	public void teleopTick(InputState state) {
 		
-	}
-	public String toString(){
-		return componentType+"Component";
 	}
 	
 }
