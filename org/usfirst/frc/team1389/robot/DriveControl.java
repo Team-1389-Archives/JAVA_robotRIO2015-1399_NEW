@@ -116,7 +116,8 @@ public class DriveControl extends Component{
 	@Override
 	public void teleopTick(InputState state)
 	{
-		drive(state.getDrive().getLeftX(), state.getDrive().getLeftY(),state);//TODO make only state get passed
+		VerifyVelocity(leftVel, rightVel, encoder1, encoder2);
+		drive(state.getDrive().getLeftX(), state.getDrive().getLeftY(),state);//TODO 
 	}
 	/**
 	 * Drive train Autonomous setup

@@ -44,15 +44,16 @@ public class Robot extends SampleRobot {
 	 */
 	public void operatorControl()
 	{
+		
 		for (Component c: components){
 			c.teleopConfig();
 		}
 		while (isOperatorControl())
 		{
+			SmartDashboard.putNumber("blorck", 3);
 			
 			state.tick();
-			if(state.getDrive().isButtonY())
-				
+			
 			
 			for (Component c: components){
 				c.teleopTick(state);
