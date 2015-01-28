@@ -22,7 +22,7 @@ package org.usfirst.frc.team1389.robot;
 public class Constants {
 	
 	static final double MAX_ACCELERATION   = 0.05;
-	static final double PERCENT_POWER_CHANGE = 0.025;
+	static final double PERCENT_POWER_CHANGE = 1;
 	
 	//Joystick input values
 	static final int ButtonX 			  = 3; // XBox Controller X Button number for getRawButton= or getRawAxis=
@@ -62,14 +62,14 @@ public class Constants {
 	static final int INFRARED_FIVE        = 4;
 	
 	//Limit Switch Digital Ports
-	static final int LIMIT_ONE            = 5;
-	static final int LIMIT_TWO            = 6;
+	static final int LIMIT_ONE            = 11;
+	static final int LIMIT_TWO            = 10;
 	
 	//Encoder Digital Ports
-	static final int ENCODER_1A           = 8;
-	static final int ENCODER_1B           = 9;
-	static final int ENCODER_2A           = 10;
-	static final int ENCODER_2B           = 11;
+	static final int ENCODER_1A           = 6;
+	static final int ENCODER_1B           = 7;
+	static final int ENCODER_2A           = 8;
+	static final int ENCODER_2B           = 9;
 
 	//Values
 	static final float LIMITER            = (float) 1.42; //Approximately sqrt(2)
