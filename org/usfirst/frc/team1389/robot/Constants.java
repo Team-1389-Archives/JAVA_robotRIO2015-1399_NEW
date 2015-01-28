@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team1389.robot;
 
 
@@ -20,6 +21,9 @@ package org.usfirst.frc.team1389.robot;
  */
 
 public class Constants {
+	
+	static final double MAX_ACCELERATION   = 0.05;
+	static final double PERCENT_POWER_CHANGE = 0.025;
 	
 	//Joystick input values
 	static final int ButtonX 			  = 3; // XBox Controller X Button number for getRawButton= or getRawAxis=
@@ -69,7 +73,7 @@ public class Constants {
 	static final int ENCODER_2B           = 11;
 
 	//Values
-	static final float LIMITER            = (float) 3; //Approximately sqrt(2)
+	static final float LIMITER            = (float) 1.42; //Approximately sqrt(2)
 	static final float ELEVATOR_SPEED_MOD = 1;
 
 }
