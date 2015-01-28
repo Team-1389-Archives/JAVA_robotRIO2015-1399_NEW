@@ -6,19 +6,19 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 
 public class InputState implements Cloneable{
-	private XBoxController drive;
-	private XBoxController manip;
+	protected XBoxController drive;
+	protected XBoxController manip;
 	
-	private Encoder encoder1;
-	private Encoder encoder2;
+	protected Encoder encoder1;
+	protected Encoder encoder2;
 	
-	private Accelerometer accelerometer;
+	protected Accelerometer accelerometer;
 	
-	private DigitalInput limit1;
-	private DigitalInput limit2;
+	protected DigitalInput limit1;
+	protected DigitalInput limit2;
 	
 	
-	private DigitalInput[] infared;
+	protected DigitalInput[] infared;
 	
 	public InputState(){
 		accelerometer= new BuiltInAccelerometer();
@@ -39,50 +39,9 @@ public class InputState implements Cloneable{
 		infared[3]= new DigitalInput(Constants.INFRARED_FOUR);
 		infared[4]= new DigitalInput(Constants.INFRARED_FIVE);
 	}
-	
-	public void tick() {
+	public void tick(){
 		drive.tick();
-		//TODO
+		manip.tick();
 	}
-	 protected InputState clone() throws CloneNotSupportedException {
-	        InputState newState = (InputState) super.clone();
-	        newState.drive = drive.clone();
-	        newState.manip = manip.clone();
-	        return newState;
-	 }
-	 
-
-	public Accelerometer getAccelerometer() {
-		return accelerometer;
-	}
-
-	public DigitalInput[] getInfared() {
-		return infared;
-	}
-
-	public DigitalInput getLimit1() {
-		return limit1;
-	}
-
-	public DigitalInput getLimit2() {
-		return limit2;
-	}
-
-	public XBoxController getDrive() {
-		return drive;
-	}
-
-	public XBoxController getManip() {
-		return manip;
-	}
-
-	public Encoder getEncoder1() {
-		return encoder1;
-	}
-
-	public Encoder getEncoder2() {
-		return encoder2;
-	}
-
 
 }

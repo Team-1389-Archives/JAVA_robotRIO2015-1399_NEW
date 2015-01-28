@@ -1,35 +1,10 @@
 package org.usfirst.frc.team1389.robot;
 
-public class Component implements phaseMethods{
+public abstract class Component{
 	
 	protected String componentType;
-	
-	@Override
-	public void test() {
-	}
+	static final int DRIVE=0,ELEVATOR=1;
 
-	@Override
-	public void autonConfig() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void autonTick() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void teleopConfig() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void teleopTick(InputState state) {
-		
-	}
 	public String toString(){
 		return componentType+"Component";
 	}

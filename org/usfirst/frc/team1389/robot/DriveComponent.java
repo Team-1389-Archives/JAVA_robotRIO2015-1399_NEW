@@ -49,7 +49,7 @@ public class DriveComponent extends Component{
 		RBDrive.set(actualRight);
 		
 		if(encoderVerified){
-			VerifyVelocity(leftPower, rightPower, Storage.state.encoder1, Robot.state.encoder2);
+			VerifyVelocity(leftPower, rightPower, Robot.state.encoder1, Robot.state.encoder2);
 			leftPower*=leftCoef;
 			rightPower*=rightCoef;
 		}
