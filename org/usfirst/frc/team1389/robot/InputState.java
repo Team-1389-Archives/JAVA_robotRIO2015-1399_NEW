@@ -1,10 +1,8 @@
 package org.usfirst.frc.team1389.robot;
 
-import edu.wpi.first.wpilibj.AnalogAccelerometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 
 public class InputState implements Cloneable{
@@ -14,8 +12,7 @@ public class InputState implements Cloneable{
 	private Encoder encoder1;
 	private Encoder encoder2;
 	
-	private AnalogAccelerometer accelerometer;
-	private Gyro gyro;
+	private Accelerometer accelerometer;
 	
 	private DigitalInput limit1;
 	private DigitalInput limit2;
@@ -24,14 +21,12 @@ public class InputState implements Cloneable{
 	private DigitalInput[] infared;
 	
 	public InputState(){
-		accelerometer= new AnalogAccelerometer(Constants.ACCCEL);
-		gyro = new Gyro(Constants.GYRO);
-		
+		accelerometer= new BuiltInAccelerometer();
 		drive = new XBoxController(Constants.DRIVE_JOY);
 		manip = new XBoxController(Constants.MANIP_JOY);
 		
 		encoder1 = new Encoder(Constants.ENCODER_1A,Constants.ENCODER_1B);
-		encoder2 = new Encoder(Constants.ENCODER_2A,Constants.ENCODER_2B);
+		encoder1 = new Encoder(Constants.ENCODER_2A,Constants.ENCODER_2B);
 		
 		limit1 = new DigitalInput(Constants.LIMIT_ONE);
 		limit2 = new DigitalInput(Constants.LIMIT_TWO);
@@ -57,7 +52,7 @@ public class InputState implements Cloneable{
 	 }
 	 
 
-	public AnalogAccelerometer getAccelerometer() {
+	public Accelerometer getAccelerometer() {
 		return accelerometer;
 	}
 

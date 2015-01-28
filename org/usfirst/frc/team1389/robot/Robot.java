@@ -52,10 +52,11 @@ public class Robot extends SampleRobot {
 		while (isOperatorControl())
 		{
 			state.tick();
+			SmartDashboard.putNumber("Acceleration:",state.getAccelerometer().getX());
 			for (Component c: components){
 				c.teleopTick(state);
 			}
-			//timer.delay(.05);
+			timer.delay(.05);
 		}
 		
 	}
