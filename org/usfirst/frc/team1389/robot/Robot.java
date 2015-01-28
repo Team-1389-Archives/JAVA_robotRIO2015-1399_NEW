@@ -3,7 +3,6 @@ package org.usfirst.frc.team1389.robot;
 import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -20,41 +19,53 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Paul LoBuglio
  */
 
-public class Robot extends IterativeRobot {
+public class Robot extends SampleRobot {
+	
 	//instance variables
-	Component[] components;
-	public static InputState state;
-	private Control control;
-	
-	/**Instantiates all component objects and input state
-	 */
-	public Robot(){
-		state=new InputState();
-		components = new Component[2];
-		components[Component.DRIVE]=new DriveComponent();
-		components[Component.ELEVATOR]=new ElevatorComponent();
-	}
-	
-	
-	/**Teleoperated configuration
-	 * called every time teleop is initiated
-	 */
-	@Override
-	public void teleopInit(){
-		control=new TeleopControl(components);
-	}
-	
-	
-	/**Teleoperated periodic method
-	 * Called about 50 times per second
- 	 */
-	@Override
-	public void teleopPeriodic() //Called about 50 times per second
-	{
-		state.tick();
-		control.tick();
-	}
-	public void teleopContinuous(){
+	ArrayList<Component> components;
+	InputState state;
+	Timer timer;
 		
+	/**
+	 * Instantiates all static motors and sensors. 
+	 * Instantiates all component objects
+	 */
+	public Robot()
+	{
+		timer = new Timer();
+		components = new ArrayList<Component>();
+		state = new InputState();
+		components.add(new DriveControl());
+		components.add(new ElevatorControl());
+		SmartDashboard.putString("components:", components.toString());
+	}
+	
+	/**
+	 * Teleoperated configuration
+	 * Update each component each iteration through the ".teleopTick()" method
+	 */
+	public void operatorControl()
+	{
+		for (Component c: components){
+			c.teleopConfig();
+		}
+		while (isOperatorControl())
+		{
+			state.tick();
+			SmartDashboard.putNumber("Acceleration:",state.getAccelerometer().getX());
+			for (Component c: components){
+				c.teleopTick(state);
+			}
+			timer.delay(.05);
+		}
+		
+	}
+	
+	/**
+	 * Autonomous configuration
+	 * Update each component through the ".autonTick()" method
+	 */
+	public void autonomous() {
+		//TODO
 	}
 }
