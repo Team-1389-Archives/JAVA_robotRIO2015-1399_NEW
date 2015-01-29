@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1389.robot;
 
 import edu.wpi.first.wpilibj.AnalogAccelerometer;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -13,8 +14,7 @@ public class InputState implements Cloneable{
 	public Encoder encoder1;
 	public Encoder encoder2;
 	
-	public AnalogAccelerometer accelX;
-	public AnalogAccelerometer accelY;
+	public BuiltInAccelerometer accel;
 	public Gyro gyro;
 	
 	public DigitalInput limit1;
@@ -26,12 +26,12 @@ public class InputState implements Cloneable{
 	
 	public InputState(){
 		
-		accelX = new AnalogAccelerometer(Constants.ACCCELX);
-		accelY = new AnalogAccelerometer(Constants.ACCCELY);
+		accel = new BuiltInAccelerometer();
 		
 		gyro = new Gyro(Constants.GYRO);
 		
 		time = new Timer();
+		time.start();
 		
 		drive = new XBoxController(Constants.DRIVE_JOY);
 		manip = new XBoxController(Constants.MANIP_JOY);
@@ -53,7 +53,6 @@ public class InputState implements Cloneable{
 	
 	public void tick() {
 		drive.tick();
-		//TODO
 	}
 	 protected InputState clone() throws CloneNotSupportedException {
 	        InputState newState = (InputState) super.clone();
