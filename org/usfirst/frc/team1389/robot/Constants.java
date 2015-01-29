@@ -45,16 +45,14 @@ public class Constants {
 	static final int RF_PWM_DRIVE         = 3;
 	static final int LF_PWM_DRIVE         = 2;
 	static final int LB_PWM_DRIVE         = 1;
-	static final int ELEVATOR_PWM         = 13;
+	static final int ELEVATOR_PWM         = 9;
 	
 	//Joystick USB ports
 	static final int DRIVE_JOY            = 0;
 	static final int MANIP_JOY            = 1;
 	
 	//Analog Sensor Ports
-	static final int ACCCELX			  = 0;
-	static final int ACCCELY			  = 1;
-	static final int GYRO				  = 2;
+	static final int GYRO				  = 1;
 	//IR Sensor Digital Ports
 	static final int INFRARED_ONE         = 0;
 	static final int INFRARED_TWO         = 1;

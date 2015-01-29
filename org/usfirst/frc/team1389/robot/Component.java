@@ -21,7 +21,6 @@ public class Component implements phaseMethods{
 	@Override
 	public void teleopConfig() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

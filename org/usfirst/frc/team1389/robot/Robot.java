@@ -20,7 +20,7 @@ public class Robot extends SampleRobot {
 	
 	//instance variables
 	ArrayList<Component> components;
-	static InputState state = new InputState();
+	static InputState state;
 	
 	
 	/**
@@ -29,6 +29,7 @@ public class Robot extends SampleRobot {
 	 */
 	public Robot()
 	{
+		state= new InputState();
 		components = new ArrayList<Component>();
 		components.add(new DriveControl());
 		components.add(new ElevatorControl());
@@ -42,16 +43,12 @@ public class Robot extends SampleRobot {
 	 */
 	public void operatorControl()
 	{
-		
 		for (Component c: components){
 			c.teleopConfig();
 		}
 		while (isOperatorControl())
 		{
-			SmartDashboard.putNumber("blorck", 3);
-			
 			state.tick();
-			
 			
 			for (Component c: components){
 				c.teleopTick();
@@ -64,7 +61,4 @@ public class Robot extends SampleRobot {
 	 * Autonomous configuration
 	 * Update each component through the ".autonTick()" method
 	 */
-	public void autonomous() {
-		//TODO
-	}
 }
