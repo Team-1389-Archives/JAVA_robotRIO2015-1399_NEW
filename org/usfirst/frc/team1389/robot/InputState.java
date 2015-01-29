@@ -13,7 +13,8 @@ public class InputState implements Cloneable{
 	public Encoder encoder1;
 	public Encoder encoder2;
 	
-	public AnalogAccelerometer accel;
+	public AnalogAccelerometer accelX;
+	public AnalogAccelerometer accelY;
 	public Gyro gyro;
 	
 	public DigitalInput limit1;
@@ -25,7 +26,9 @@ public class InputState implements Cloneable{
 	
 	public InputState(){
 		
-		accel = new AnalogAccelerometer(Constants.ACCCEL);
+		accelX = new AnalogAccelerometer(Constants.ACCCELX);
+		accelY = new AnalogAccelerometer(Constants.ACCCELY);
+		
 		gyro = new Gyro(Constants.GYRO);
 		
 		time = new Timer();

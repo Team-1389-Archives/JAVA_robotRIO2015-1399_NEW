@@ -52,8 +52,9 @@ public class Constants {
 	static final int MANIP_JOY            = 1;
 	
 	//Analog Sensor Ports
-	static final int ACCCEL				  = 0;
-	static final int GYRO				  = 1;
+	static final int ACCCELX			  = 0;
+	static final int ACCCELY			  = 1;
+	static final int GYRO				  = 2;
 	//IR Sensor Digital Ports
 	static final int INFRARED_ONE         = 0;
 	static final int INFRARED_TWO         = 1;

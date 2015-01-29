@@ -32,6 +32,7 @@ public class Robot extends SampleRobot {
 		components = new ArrayList<Component>();
 		components.add(new DriveControl());
 		components.add(new ElevatorControl());
+		components.add(new PosTrack());
 	}
 	
 	
