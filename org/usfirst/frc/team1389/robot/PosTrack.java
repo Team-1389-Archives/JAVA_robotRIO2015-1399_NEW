@@ -3,6 +3,7 @@ package org.usfirst.frc.team1389.robot;
 import edu.wpi.first.wpilibj.AnalogAccelerometer;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.nav6.frc.BufferingSerialPort;
@@ -11,7 +12,7 @@ import com.kauailabs.nav6.frc.IMUAdvanced;
 
 
 public class PosTrack extends Component{
-	
+
 	
 	BufferingSerialPort serial_port = Robot.state.serial_port;
     IMUAdvanced imu = Robot.state.imu;
@@ -20,6 +21,14 @@ public class PosTrack extends Component{
 	float dt = 0;
 	float t1 = 0;
 	float aX, aY, velX, velY, posX, posY;
+	
+	public PosTrack(){
+		time = Robot.state.time;
+		velX=0;
+		velY=0;
+		posX=0;
+		posY=0;
+	}
 	
 	@Override
 	public void teleopTick() {
@@ -37,8 +46,14 @@ public class PosTrack extends Component{
 		posX += (velX * dt) + (.5 * aX * Math.pow(dt, 2));
 		posY += (velY * dt) + (.5 * aY * Math.pow(dt, 2));
 		
+		SmartDashboard.putNumber("velX", velX);
+		SmartDashboard.putNumber("velY", velY);
 		SmartDashboard.putNumber("X Displacment", posX);
 		SmartDashboard.putNumber("Y Displacment", posY);
+		SmartDashboard.putNumber("accelX", aX);
+		SmartDashboard.putNumber("accelY", aY);
+		SmartDashboard.putNumber("dt", dt);
+		SmartDashboard.putNumber("t1", t1);
 	}
 
 	

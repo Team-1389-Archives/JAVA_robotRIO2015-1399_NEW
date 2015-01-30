@@ -22,7 +22,7 @@ package org.usfirst.frc.team1389.robot;
 
 public class Constants {
 	
-	static final double MAX_ACCELERATION   = 0.05;
+	static final double MAX_ACCELERATION   = 0.002;
 	static final double PERCENT_POWER_CHANGE = 0.025;
 	
 	//Joystick input values
@@ -45,26 +45,24 @@ public class Constants {
 	static final int RF_PWM_DRIVE         = 3;
 	static final int LF_PWM_DRIVE         = 2;
 	static final int LB_PWM_DRIVE         = 1;
-	static final int ELEVATOR_PWM         = 13;
+	static final int ELEVATOR_PWM         = 9;
 	
 	//Joystick USB ports
 	static final int DRIVE_JOY            = 0;
 	static final int MANIP_JOY            = 1;
 	
 	//Analog Sensor Ports
-	static final int ACCCELX			  = 0;
-	static final int ACCCELY			  = 1;
-	static final int GYRO				  = 2;
+	static final int GYRO				  = 1;
 	//IR Sensor Digital Ports
-	static final int INFRARED_ONE         = 0;
-	static final int INFRARED_TWO         = 1;
-	static final int INFRARED_THREE       = 2;
-	static final int INFRARED_FOUR        = 3;
-	static final int INFRARED_FIVE        = 4;
+	static final int INFRARED_ONE         = 3;
+	static final int INFRARED_TWO         = 4;
+	static final int INFRARED_THREE       = 5;
+	static final int INFRARED_FOUR        = 6;
+	static final int INFRARED_FIVE        = 7;
 	
 	//Limit Switch Digital Ports
-	static final int LIMIT_ONE            = 5;
-	static final int LIMIT_TWO            = 6;
+	static final int LIMIT_ONE            = 6;
+	static final int LIMIT_TWO            = 7;
 	
 	//Encoder Digital Ports
 	static final int ENCODER_1A           = 8;
@@ -76,5 +74,6 @@ public class Constants {
 	static final float LIMITER            = (float) 1.42; //Approximately sqrt(2)
 	static final float INCHES_PER_ROT     = (float) 12.5663706144;
 	static final float ELEVATOR_SPEED_MOD = 1;
+
 
 }

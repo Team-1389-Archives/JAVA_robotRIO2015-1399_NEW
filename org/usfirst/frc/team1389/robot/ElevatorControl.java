@@ -8,14 +8,33 @@ public class ElevatorControl extends Component{
 	//Sense stores the boolean returns of each IR sensor, updating each tick. Last sense is the same as sense,
 	//but values only update when a IR sensor is passed
 	
+	boolean lastA = false;
+	boolean lastB = false;
+	int position = 0;
+	
 	public void teleopConfig(){
 	}
-	public void teleopTick(InputState state){
+	@Override
+	public void teleopTick(){
+		boolean isA = Robot.state.drive.getStick().getRawButton(Constants.ButtonA);
+		boolean isB = Robot.state.drive.getStick().getRawButton(Constants.ButtonB);
+		if (isA && !lastA && position != 4){//TODO constant max position
+			position += 1;
+		}
+		if (isB && !lastB && position != 0){
+			position -= 1;
+		}
+		SmartDashboard.putNumber("pos",position);
+		
+		lastA = isA;
+		lastB = isB;
 		DigitalInput[] sensors= Robot.state.infared;
 		int lastSensor=0;
 		for(int d=0;d<sensors.length;d++){
 			if(!sensors[d].get())lastSensor=d;
 		} 
+		
+		goTo(position, sensors);
 		SmartDashboard.putBoolean("IR One value", Robot.state.infared[0].get());
 	}
 
@@ -28,7 +47,7 @@ public class ElevatorControl extends Component{
  	* @param loc level to go to
  	* @param sensors array of infared sensors
 	*/
-	public void goTo(int loc,DigitalInput[] sensors){
+	private void goTo(int loc,DigitalInput[] sensors){
 		int lastSensor=0;
 		for(int d=0;d<sensors.length;d++){
 			if(!sensors[d].get())lastSensor=d;
@@ -36,7 +55,7 @@ public class ElevatorControl extends Component{
 		elevator.set(whereToGo(loc, lastSensor) * Constants.ELEVATOR_SPEED_MOD);
 	}
 	
-	public void move(int direction, DigitalInput[] sensors){
+	private void move(int direction, DigitalInput[] sensors){
 		int dir=0;
 		if (direction==1&&!sensors[4].get())
 		{

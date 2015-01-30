@@ -3,20 +3,22 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveControl extends Component{
-
+	final int STRICT_COMPUTER=0;
+	final int FULL_USER=1;
+	final int COMPUTER_ASSISTED=2;
 	Talon RFDrive;
 	Talon RBDrive;
 	Talon LFDrive;
 	Talon LBDrive;
 	double leftCoef;
 	double rightCoef;
-
+	int rampUpState;
 	final boolean encoderVerified=true;
-	final AssistedRampUp rampUpState=AssistedRampUp.COMPUTER_ASSISTED;
 
 	double actualLeft = 0, actualRight = 0;
-
+	
 	public DriveControl() {
+		rampUpState=COMPUTER_ASSISTED;
 		leftCoef=1;
 		rightCoef=1;
 		RFDrive = new Talon(Constants.RF_PWM_DRIVE);
@@ -26,15 +28,15 @@ public class DriveControl extends Component{
 	}	
 
 	public void drive(double x,double y){
-
+		
 		double leftPower=(y + x) / Constants.LIMITER;
 		double rightPower=(y - x) / Constants.LIMITER * -1;
 
-		if(rampUpState==AssistedRampUp.COMPUTER_ASSISTED){
+		if(rampUpState==COMPUTER_ASSISTED){
 			actualLeft=AssistedPowerControl(leftPower,actualLeft);
 			actualRight=AssistedPowerControl(rightPower,actualRight);
 		}
-		else if(rampUpState==AssistedRampUp.STRICT_COMPUTER){
+		else if(rampUpState==STRICT_COMPUTER){
 			actualLeft=PowerControl(leftPower,actualLeft);
 			actualRight=PowerControl(rightPower,actualRight);
 		}
@@ -83,7 +85,7 @@ public class DriveControl extends Component{
 	 */
 	private double PowerControl(double Power, double actualPower){
 		//TODO
-		double proportionalChange = Constants.PERCENT_POWER_CHANGE * Math.abs(Power - actualPower);
+		double proportionalChange = Constants.MAX_ACCELERATION;
 		if (Power > actualPower + proportionalChange){
 			actualPower += proportionalChange;
 		} else if (Power < actualPower - proportionalChange){
@@ -116,8 +118,25 @@ public class DriveControl extends Component{
 	@Override
 	public void teleopTick()
 	{
-		drive(Robot.state.drive.getLeftX(), Robot.state.drive.getLeftY() * -1);//TODO 
+		String rampUp = null;
+		switch(rampUpState){
+			case STRICT_COMPUTER:rampUp="Strict";
+			break;
+			case FULL_USER:rampUp="User";
+			break;
+			case COMPUTER_ASSISTED:rampUp="Assisted";
+			break;
+			default:rampUp="null";
+		}
+		SmartDashboard.putString("RampUp", rampUp);
+		SmartDashboard.putNumber("state", rampUpState);
+		if(Robot.state.drive.isBPressed()){
+			rampUpState++;
+			rampUpState%=3;
+		}
+		drive(Robot.state.drive.getLeftX(), Robot.state.drive.getLeftY() * -1); 
 	}
+	
 	/**
 	 * Drive train Autonomous setup
 	 */

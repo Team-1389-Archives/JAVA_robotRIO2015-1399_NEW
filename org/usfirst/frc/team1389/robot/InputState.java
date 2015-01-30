@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1389.robot;
 
 import edu.wpi.first.wpilibj.AnalogAccelerometer;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -22,8 +23,7 @@ public class InputState implements Cloneable{
 	public BufferingSerialPort serial_port;
     public IMUAdvanced imu;
     
-	public AnalogAccelerometer accelX;
-	public AnalogAccelerometer accelY;
+
 	public Gyro gyro;
 	
 	public DigitalInput limit1;
@@ -35,7 +35,6 @@ public class InputState implements Cloneable{
 	
 	public InputState(){
 		
-		
 		//Init IMU
 		try {
 			serial_port = new BufferingSerialPort(57600);
@@ -45,14 +44,11 @@ public class InputState implements Cloneable{
 		}
 		 imu = new IMUAdvanced(serial_port);
 		 
+
 		
-		
-		accelX = new AnalogAccelerometer(Constants.ACCCELX);
-		accelY = new AnalogAccelerometer(Constants.ACCCELY);
-		
-		gyro = new Gyro(Constants.GYRO);
 		
 		time = new Timer();
+		time.start();
 		
 		drive = new XBoxController(Constants.DRIVE_JOY);
 		manip = new XBoxController(Constants.MANIP_JOY);
@@ -60,8 +56,8 @@ public class InputState implements Cloneable{
 		encoder1 = new Encoder(Constants.ENCODER_1A,Constants.ENCODER_1B);
 		encoder2 = new Encoder(Constants.ENCODER_2A,Constants.ENCODER_2B);
 		
-		limit1 = new DigitalInput(Constants.LIMIT_ONE);
-		limit2 = new DigitalInput(Constants.LIMIT_TWO);
+		//limit1 = new DigitalInput(Constants.LIMIT_ONE);
+		//limit2 = new DigitalInput(Constants.LIMIT_TWO);
 		
 		infared = new DigitalInput[5];
 		
@@ -74,14 +70,8 @@ public class InputState implements Cloneable{
 	
 	public void tick() {
 		drive.tick();
-		//TODO
 	}
-	 protected InputState clone() throws CloneNotSupportedException {
-	        InputState newState = (InputState) super.clone();
-	        newState.drive = drive.clone();
-	        newState.manip = manip.clone();
-	        return newState;
-	 }
+
 	 
 
 }
