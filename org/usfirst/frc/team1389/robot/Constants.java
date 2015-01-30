@@ -54,15 +54,15 @@ public class Constants {
 	//Analog Sensor Ports
 	static final int GYRO				  = 1;
 	//IR Sensor Digital Ports
-	static final int INFRARED_ONE         = 0;
-	static final int INFRARED_TWO         = 1;
-	static final int INFRARED_THREE       = 2;
-	static final int INFRARED_FOUR        = 3;
-	static final int INFRARED_FIVE        = 4;
+	static final int INFRARED_ONE         = 3;
+	static final int INFRARED_TWO         = 4;
+	static final int INFRARED_THREE       = 5;
+	static final int INFRARED_FOUR        = 6;
+	static final int INFRARED_FIVE        = 7;
 	
 	//Limit Switch Digital Ports
-	static final int LIMIT_ONE            = 5;
-	static final int LIMIT_TWO            = 6;
+	static final int LIMIT_ONE            = 6;
+	static final int LIMIT_TWO            = 7;
 	
 	//Encoder Digital Ports
 	static final int ENCODER_1A           = 8;
@@ -72,6 +72,6 @@ public class Constants {
 
 	//Values
 	static final float LIMITER            = (float) 1.42; //Approximately sqrt(2)
-	static final float ELEVATOR_SPEED_MOD = 1;
+	static final float ELEVATOR_SPEED_MOD = -0.2f;
 
 }
