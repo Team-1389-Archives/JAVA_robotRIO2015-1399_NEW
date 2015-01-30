@@ -74,6 +74,7 @@ public class Constants {
 
 	//Values
 	static final float LIMITER            = (float) 1.42; //Approximately sqrt(2)
+	static final float INCHES_PER_ROT     = (float) 12.5663706144;
 	static final float ELEVATOR_SPEED_MOD = 1;
 
 }

@@ -5,26 +5,37 @@ import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class PosTrack extends Component{
+import com.kauailabs.nav6.frc.BufferingSerialPort;
+import com.kauailabs.nav6.frc.IMU;
+import com.kauailabs.nav6.frc.IMUAdvanced;
 
-	Gyro gyro = Robot.state.gyro;
-	AnalogAccelerometer accelX = Robot.state.accelX;
-	AnalogAccelerometer accelY = Robot.state.accelY;
+
+public class PosTrack extends Component{
+	
+	
+	BufferingSerialPort serial_port = Robot.state.serial_port;
+    IMUAdvanced imu = Robot.state.imu;
+
 	Timer time = Robot.state.time;
 	float dt = 0;
 	float t1 = 0;
-	float velX, velY, posX, posY;
+	float aX, aY, velX, velY, posX, posY;
 	
 	@Override
 	public void teleopTick() {
 		dt = (float) (time.get() - t1);
 		t1 = (float) time.get();
 		
-		velX += (accelX.getAcceleration() * 9.8 * Math.cos(Math.toRadians(gyro.getAngle()) + accelY.getAcceleration() * 9.8 * Math.cos(Math.toRadians(gyro.getAngle())))) * dt;
-		velY += (accelX.getAcceleration() * 9.8 * Math.sin(Math.toRadians(gyro.getAngle()) + accelY.getAcceleration() * 9.8 * Math.sin(Math.toRadians(gyro.getAngle())))) * dt;
+		aX = (float) (imu.getWorldLinearAccelX() * 9.8 * Math.cos(Math.toRadians(imu.getCompassHeading()) + imu.getWorldLinearAccelY() * 9.8 * Math.cos(Math.toRadians(imu.getCompassHeading()))));
+		aY = (float) (imu.getWorldLinearAccelX() * 9.8 * Math.sin(Math.toRadians(imu.getCompassHeading()) + imu.getWorldLinearAccelY() * 9.8 * Math.sin(Math.toRadians(imu.getCompassHeading()))));
 		
-		posX += velX * dt;
-		posY += velY * dt;
+		velX += aX * dt;
+		velY += aY * dt;
+		
+		
+		//Double integrate accelerometer readings (dx = Vdt + 1/2at^2)
+		posX += (velX * dt) + (.5 * aX * Math.pow(dt, 2));
+		posY += (velY * dt) + (.5 * aY * Math.pow(dt, 2));
 		
 		SmartDashboard.putNumber("X Displacment", posX);
 		SmartDashboard.putNumber("Y Displacment", posY);
