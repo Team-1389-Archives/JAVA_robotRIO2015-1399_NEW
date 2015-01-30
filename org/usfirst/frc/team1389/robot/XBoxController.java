@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1389.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class XBoxController implements Cloneable{
 	private Joystick stick;
@@ -10,17 +11,20 @@ public class XBoxController implements Cloneable{
 	private boolean buttonY; // XBox Controller Y Button number
 	private boolean bumperL; // XBox Controller  Left Bumper number
 	private boolean bumperR; // XBox Controller Right Bumper number
-
+	public boolean BPressed;
 	private double leftY; // XBox Controller  Left Y Axis number
 	private double leftX; // XBox Controller  Left X Axis number
 	private boolean leftTrigger; // XBox Controller  Left Trigger Axis number
 	private boolean rightTrigger; // XBox Controller  Right Trigger Axis number
 	private double rightY; // XBox Controller Right Y Axis number
 	private double rightX; // XBox Controller Right X Axis number
-	public XBoxController(int port) {
+	public XBoxController(int port){
+		BPressed=false;
 		stick = new Joystick(port);
 	}
 	public void tick(){
+		BPressed=false;
+		if(isPressed(buttonB,stick.getRawButton(Constants.ButtonB)))BPressed=true;
 		leftX = stick.getRawAxis(Constants.LeftX);
 		leftY = stick.getRawAxis(Constants.LeftY);
 		rightX = stick.getRawAxis(Constants.RightX);
@@ -34,9 +38,6 @@ public class XBoxController implements Cloneable{
 		bumperL = stick.getRawButton(Constants.BumperL); 
 		bumperR = stick.getRawButton(Constants.BumperR);
 	}
-	 protected XBoxController clone() throws CloneNotSupportedException {
-	       return (XBoxController) super.clone();
-	 }
 	public Joystick getStick() {
 		return stick;
 	} 
@@ -75,6 +76,13 @@ public class XBoxController implements Cloneable{
 	}
 	public double getRightX() {
 		return rightX;
+	}
+	public boolean isBPressed(){
+		return BPressed;
+	}
+	public boolean isPressed(boolean oldState, boolean currentState){
+		SmartDashboard.putBoolean("Pressed",oldState&&(!currentState));
+		return oldState&&(!currentState);
 	}
 	
 }

@@ -85,7 +85,7 @@ public class DriveControl extends Component{
 	 */
 	private double PowerControl(double Power, double actualPower){
 		//TODO
-		double proportionalChange = Constants.PERCENT_POWER_CHANGE * Math.abs(Power - actualPower);
+		double proportionalChange = Constants.MAX_ACCELERATION;
 		if (Power > actualPower + proportionalChange){
 			actualPower += proportionalChange;
 		} else if (Power < actualPower - proportionalChange){
@@ -121,13 +121,16 @@ public class DriveControl extends Component{
 		String rampUp = null;
 		switch(rampUpState){
 			case STRICT_COMPUTER:rampUp="Strict";
+			break;
 			case FULL_USER:rampUp="User";
+			break;
 			case COMPUTER_ASSISTED:rampUp="Assisted";
+			break;
 			default:rampUp="null";
 		}
 		SmartDashboard.putString("RampUp", rampUp);
 		SmartDashboard.putNumber("state", rampUpState);
-		if(Robot.state.drive.isButtonB()){
+		if(Robot.state.drive.isBPressed()){
 			rampUpState++;
 			rampUpState%=3;
 		}

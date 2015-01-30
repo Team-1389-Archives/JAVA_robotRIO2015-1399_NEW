@@ -54,12 +54,7 @@ public class InputState implements Cloneable{
 	public void tick() {
 		drive.tick();
 	}
-	 protected InputState clone() throws CloneNotSupportedException {
-	        InputState newState = (InputState) super.clone();
-	        newState.drive = drive.clone();
-	        newState.manip = manip.clone();
-	        return newState;
-	 }
+
 	 
 
 }

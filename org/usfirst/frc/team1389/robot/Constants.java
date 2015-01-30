@@ -22,7 +22,7 @@ package org.usfirst.frc.team1389.robot;
 
 public class Constants {
 	
-	static final double MAX_ACCELERATION   = 0.05;
+	static final double MAX_ACCELERATION   = 0.002;
 	static final double PERCENT_POWER_CHANGE = 0.025;
 	
 	//Joystick input values
