@@ -51,18 +51,13 @@ public class Constants {
 	static final int DRIVE_JOY            = 0;
 	static final int MANIP_JOY            = 1;
 	
-	//Analog Sensor Ports
-	static final int GYRO				  = 1;
 	//IR Sensor Digital Ports
 	static final int INFRARED_ONE         = 3;
 	static final int INFRARED_TWO         = 4;
 	static final int INFRARED_THREE       = 5;
 	static final int INFRARED_FOUR        = 6;
 	static final int INFRARED_FIVE        = 7;
-	
-	//Limit Switch Digital Ports
-	static final int LIMIT_ONE            = 6;
-	static final int LIMIT_TWO            = 7;
+	static final int CONTACT_SENSE        = 2;
 	
 	//Encoder Digital Ports
 	static final int ENCODER_1A           = 8;

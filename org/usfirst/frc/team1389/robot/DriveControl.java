@@ -108,6 +108,7 @@ public class DriveControl extends Component{
 			rightCoef*=Math.abs(error)*multiplier;
 		}
 	}
+	
 
 	@Override
 	public void teleopConfig(){}
@@ -136,6 +137,16 @@ public class DriveControl extends Component{
 		}
 		drive(Robot.state.drive.getLeftX(), Robot.state.drive.getLeftY() * -1); 
 	}
+	
+	
+	public void IRStop()
+	{
+		if(!Robot.state.contactSensor)
+		{
+			actualLeft = 0;
+			actualRight = 0;
+		}
+	}
 	/**
 	 * autonomous drive system
 	 * @param distance the distance to drive
@@ -143,7 +154,7 @@ public class DriveControl extends Component{
 	 * simulates xbox control stick
 	 */
 	private void forward(double distance, double speed){
-		if(IMU)
+	
 	}
 	
 	/**

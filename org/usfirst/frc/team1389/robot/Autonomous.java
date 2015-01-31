@@ -1,7 +1,13 @@
 package org.usfirst.frc.team1389.robot;
 
 public class Autonomous {
-
+	
+	//These constants hold relevant distances we need to travel in inches
+	static final float STAG_TO_AUTO = 80; //Distance from in front of AutoTotes -> AutoZone.
+	static final float BETW_AUTO_TOTES = 85; //Distance to travel inbetween auto totes when picking up all totes
+	
+	
+	
 	public Autonomous(int methodNum)
 	{
 		switch(methodNum)
@@ -20,7 +26,6 @@ public class Autonomous {
 
 	public void autonOne()
 	{
-
 	}
 
 	public void autonTwo()

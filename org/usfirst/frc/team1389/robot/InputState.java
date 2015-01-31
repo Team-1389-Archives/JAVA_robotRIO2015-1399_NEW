@@ -26,12 +26,11 @@ public class InputState implements Cloneable{
 
 	public Gyro gyro;
 	
-	public DigitalInput limit1;
-	public DigitalInput limit2;
-	
+
 	public Timer time;
 	
 	public DigitalInput[] infared;
+	public DigitalInput contactSensor;
 	
 	public InputState(){
 		
@@ -66,6 +65,7 @@ public class InputState implements Cloneable{
 		infared[2]= new DigitalInput(Constants.INFRARED_THREE);
 		infared[3]= new DigitalInput(Constants.INFRARED_FOUR);
 		infared[4]= new DigitalInput(Constants.INFRARED_FIVE);
+		contactSensor = new DigitalInput(Constants.CONTACT_SENSE);
 	}
 	
 	public void tick() {

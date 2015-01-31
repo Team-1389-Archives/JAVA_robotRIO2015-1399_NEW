@@ -16,10 +16,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Paul LoBuglio
  */
 
+
+//Component @ in0 = DriverControl
+//Component @ in1 = ElevatorControl
+//Component @ in2 = PosTrack
 public class Robot extends SampleRobot {
 	
 	//instance variables
-	final int autonomousState=1;
+	final int autonomousState = 1;
 	ArrayList<Component> components;
 	static InputState state;
 	
@@ -60,21 +64,12 @@ public class Robot extends SampleRobot {
 
 	@Override
 	public void autonomous(){
-		switch(autonomousState){
-			case 1:
-				autonomous1();
-				break;
-			default:
-				break;
-		}
+		new Autonomous(autonomousState);
 	}
 
 	/**bot into auton
 	 * go forward into autonomous zone
 	 */
-	private void autonomous1() {
-		
-	} 
 	
 	/**
 	 * Autonomous configuration
