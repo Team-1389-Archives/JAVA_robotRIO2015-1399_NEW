@@ -81,38 +81,11 @@ public class Autonomous {
 	{
 		elevator.goTo(1);
 		drive.move(BETW_AUTO_TOTES, AUTON_SPEED_MOD);
-		start = (float) Robot.state.time.get();
-		while(lowerTime < 2)
-		{
-			
-			lowerTime = (float) (Robot.state.time.get() - start);
-			elevator.elevator.set(-1);
-		}
-		lowerTime = 0;
-		start = 0;
-
-		while(Robot.state.infared[1].get())
-		{
-			elevator.elevator.set(1);
-		}
-
+		elevator.goTo(0);
+		elevator.goTo(1);
 		drive.move(BETW_AUTO_TOTES * MULTIPLIER, AUTON_SPEED_MOD);
-		
-		start = (float) Robot.state.time.get();
-		while(lowerTime < 2)
-		{
-			
-			lowerTime = (float) (Robot.state.time.get() - start);
-			elevator.elevator.set(-1);
-		}
-		lowerTime = 0;
-		start = 0;
-
-		while(Robot.state.infared[1].get())
-		{
-			elevator.elevator.set(1);
-		}
-		
+		elevator.goTo(0);
+		elevator.goTo(1);
 		drive.turn(-90);
 		drive.move(TAPE_TO_LANDMARK * MULTIPLIER, AUTON_SPEED_MOD);
 
