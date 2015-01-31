@@ -16,7 +16,7 @@ public class ElevatorControl extends Component{
 	public void teleopTick(){
 		boolean isA = Robot.state.manip.isAPressed();
 		boolean isB = Robot.state.manip.isBPressed();
-		if (isA && goToPosition != 4){//TODO constant max position
+		if (isA && goToPosition != Constants.ELEVATOR_MAX_HEIGHT){//TODO constant max position
 			goToPosition += 1;
 		}
 		if (isB && goToPosition != 0){
