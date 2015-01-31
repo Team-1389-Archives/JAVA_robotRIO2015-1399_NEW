@@ -23,10 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends SampleRobot {
 	
 	//instance variables
-	final int autonomousState = 1;
 	static ArrayList<Component> components;
-	
-
 	static InputState state;
 	final static int DRIVE=2,ELEVATOR=0,POS=1;
 	
@@ -42,6 +39,7 @@ public class Robot extends SampleRobot {
 		components.add(new ElevatorControl());
 		components.add(new PosTrack());
 		components.add(new DriveControl((PosTrack)(components.get(POS))));
+		
 	}
 	
 	
@@ -67,7 +65,7 @@ public class Robot extends SampleRobot {
 
 	@Override
 	public void autonomous(){
-		new Autonomous(autonomousState);
+		Autonomous auton=new Autonomous(1, components);
 	}
 
 	/**bot into auton

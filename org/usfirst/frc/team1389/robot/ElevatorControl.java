@@ -7,34 +7,24 @@ public class ElevatorControl extends Component{
 	//Our IR sensors output low when an object is within 2cm - 10cm of an object (e. g. !IRa.get() equates to true when there is an object in front of sensor one) 
 	//Sense stores the boolean returns of each IR sensor, updating each tick. Last sense is the same as sense,
 	//but values only update when a IR sensor is passed
-	
-	boolean lastA = false;
-	boolean lastB = false;
-	int position = 0;
+	int goToPosition = 0;
+	boolean going;
 	
 	public void teleopConfig(){
 	}
 	@Override
 	public void teleopTick(){
-		boolean isA = Robot.state.drive.getStick().getRawButton(Constants.ButtonA);
-		boolean isB = Robot.state.drive.getStick().getRawButton(Constants.ButtonB);
-		if (isA && !lastA && position != 4){//TODO constant max position
-			position += 1;
+		boolean isA = Robot.state.manip.isAPressed();
+		boolean isB = Robot.state.manip.isBPressed();
+		if (isA && goToPosition != Constants.ELEVATOR_MAX_HEIGHT){
+			goToPosition += 1;
 		}
-		if (isB && !lastB && position != 0){
-			position -= 1;
+		if (isB && goToPosition != 0){
+			goToPosition -= 1;
 		}
-		SmartDashboard.putNumber("pos",position);
-		
-		lastA = isA;
-		lastB = isB;
+		SmartDashboard.putNumber("pos",goToPosition);
 		DigitalInput[] sensors= Robot.state.infared;
-		int lastSensor=0;
-		for(int d=0;d<sensors.length;d++){
-			if(!sensors[d].get())lastSensor=d;
-		} 
-		
-		goTo(position, sensors);
+		if(!going)goTo(goToPosition, sensors);
 		SmartDashboard.putBoolean("IR One value", Robot.state.infared[0].get());
 	}
 
@@ -76,6 +66,7 @@ public class ElevatorControl extends Component{
 	*/
 	public int whereToGo(int senseID, int lastSensor)
 	{
+		going=true;
 		if (lastSensor > senseID){ //above the requested spot
 			return 1;
 		}
@@ -83,6 +74,7 @@ public class ElevatorControl extends Component{
 			return -1;
 		}
 		else{
+			going=false;
 			return 0;
 		}
 

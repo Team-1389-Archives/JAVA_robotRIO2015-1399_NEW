@@ -12,6 +12,7 @@ public class XBoxController implements Cloneable{
 	private boolean bumperL; // XBox Controller  Left Bumper number
 	private boolean bumperR; // XBox Controller Right Bumper number
 	public boolean BPressed;
+	public boolean APressed;
 	private double leftY; // XBox Controller  Left Y Axis number
 	private double leftX; // XBox Controller  Left X Axis number
 	private boolean leftTrigger; // XBox Controller  Left Trigger Axis number
@@ -19,12 +20,13 @@ public class XBoxController implements Cloneable{
 	private double rightY; // XBox Controller Right Y Axis number
 	private double rightX; // XBox Controller Right X Axis number
 	public XBoxController(int port){
-		BPressed=false;
 		stick = new Joystick(port);
 	}
 	public void tick(){
 		BPressed=false;
+		APressed=false;
 		if(isPressed(buttonB,stick.getRawButton(Constants.ButtonB)))BPressed=true;
+		if(isPressed(buttonA,stick.getRawButton(Constants.ButtonA)))APressed=true;
 		leftX = stick.getRawAxis(Constants.LeftX);
 		leftY = stick.getRawAxis(Constants.LeftY);
 		rightX = stick.getRawAxis(Constants.RightX);
@@ -78,6 +80,9 @@ public class XBoxController implements Cloneable{
 		return rightX;
 	}
 	public boolean isBPressed(){
+		return BPressed;
+	}
+	public boolean isAPressed(){
 		return BPressed;
 	}
 	public boolean isPressed(boolean oldState, boolean currentState){
