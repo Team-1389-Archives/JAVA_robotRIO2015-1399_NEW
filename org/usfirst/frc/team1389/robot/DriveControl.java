@@ -141,14 +141,21 @@ public class DriveControl extends Component{
 	/**
 	 * autonomous drive system
 	 * @param distance the distance to drive
-	 * @param speed min:0 max:1
+	 * @param speed min:-1 max:1 - numbers cause robot to go backward
 	 * simulates xbox control stick
 	 */
-	private double forward(double distance, double speed){
+	private double move(double distance, double speed){
 		if(pos.distance>=distance)return distance;
 		else{
 			drive(speed,0);
-			return forward(distance,speed);
+			return move(distance,speed);
+		}
+	}
+	private double turn(double angle){
+		if(pos.angle>=angle)return angle;
+		else{
+			drive(0,Math.abs(angle)/angle);
+			return turn(angle);
 		}
 	}
 	

@@ -18,11 +18,13 @@ public class PosTrack extends Component{
     IMUAdvanced imu = Robot.state.imu;
 
 	Timer time = Robot.state.time;
+	double angle;//degrees
 	double dt = 0;
 	double t1 = 0;
 	double aX, aY, velX, velY, posX, posY;
 	double distance;
 	public PosTrack(){
+		angle=imu.getCompassHeading();
 		time = Robot.state.time;
 		velX=0;
 		velY=0;
@@ -35,12 +37,12 @@ public class PosTrack extends Component{
 	public void teleopTick() {
 		dt = (float) (time.get() - t1);
 		t1 = (float) time.get();
-		
-		aX = (float) (imu.getWorldLinearAccelX() * 9.8 * Math.cos(Math.toRadians(imu.getCompassHeading()) + imu.getWorldLinearAccelY() * 9.8 * Math.cos(Math.toRadians(imu.getCompassHeading()))));
-		aY = (float) (imu.getWorldLinearAccelX() * 9.8 * Math.sin(Math.toRadians(imu.getCompassHeading()) + imu.getWorldLinearAccelY() * 9.8 * Math.sin(Math.toRadians(imu.getCompassHeading()))));
-		
+		aX = (float) (imu.getWorldLinearAccelX() * 9.8 * Math.cos(Math.toRadians(imu.getYaw()) + imu.getWorldLinearAccelY() * 9.8 * Math.cos(Math.toRadians(imu.getYaw()))));
+		aY = (float) (imu.getWorldLinearAccelX() * 9.8 * Math.sin(Math.toRadians(imu.getYaw()) + imu.getWorldLinearAccelY() * 9.8 * Math.sin(Math.toRadians(imu.getYaw()))));
 		velX += aX * dt;
 		velY += aY * dt;
+		
+		angle+=imu.getYaw();
 		
 		
 		//Double integrate accelerometer readings (dx = Vdt + 1/2at^2)
