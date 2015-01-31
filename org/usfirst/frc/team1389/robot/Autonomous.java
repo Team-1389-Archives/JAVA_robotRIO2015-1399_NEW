@@ -8,11 +8,11 @@ public class Autonomous {
 
 	//These constants hold relevant distances we need to travel in inches
 	private final double MULTIPLIER=0.0254;//inches->meters conversion
-	private final double TAPE_TO_LANDMARK = 80; //Distance from in front of AutoTotes -> AutoZone.
-	private final double STAGING_ZONE_WIDTH=48;//length down the field of yellow crate zone
-	private final double STAGING_ZONE_LENGTH=9;//width of yellow crate zone
-	private final double BETW_AUTO_TOTES = 33; //Distance to travel inbetween auto totes when picking up all totes
-	private final double TOTE_WIDTH = 26.9; //width of a tote
+	private final double TAPE_TO_LANDMARK = 80*MULTIPLIER; //Distance from in front of AutoTotes -> AutoZone.
+	private final double STAGING_ZONE_WIDTH=48*MULTIPLIER;//length down the field of yellow crate zone
+	private final double STAGING_ZONE_LENGTH=9*MULTIPLIER;//width of yellow crate zone
+	private final double BETW_AUTO_TOTES = 33*MULTIPLIER; //Distance to travel inbetween auto totes when picking up all totes
+	private final double TOTE_WIDTH = 26.9*MULTIPLIER; //width of a tote
 	
 	private DriveControl drive;
 	private ElevatorControl elevator;
@@ -41,23 +41,27 @@ public class Autonomous {
 
 	public void autonOne()
 	{
-		final double Distance=(TAPE_TO_LANDMARK)*MULTIPLIER;
-		drive.move(Distance,AUTON_SPEED_MOD);
+		drive.move(TAPE_TO_LANDMARK,AUTON_SPEED_MOD);
 	}
 
 	public void autonTwo()
 	{
-		final double crateCarryDistance=(TAPE_TO_LANDMARK+STAGING_ZONE_LENGTH)*MULTIPLIER;
+		final double crateCarryDistance=(TAPE_TO_LANDMARK+STAGING_ZONE_LENGTH);
 		elevator.goTo(1);
+		while(!elevator.going);
 		drive.move(crateCarryDistance,AUTON_SPEED_MOD);
 	}
 
 	public void autonThree()
 	{
+		//TODO fix elevator goto to hold method advancement until complete during auton
 		elevator.goTo(4);
+		while(!elevator.going);
 		drive.move(TOTE_WIDTH, AUTON_SPEED_MOD/1.2);
 		elevator.goTo(0);
+		while(!elevator.going);
 		elevator.goTo(1);
+		while(!elevator.going);
 		drive.turn(-90);
 		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
 		
@@ -65,7 +69,7 @@ public class Autonomous {
 
 	public void autonFour()
 	{
-
+		
 	}
 
 	public void autonFive()
@@ -75,11 +79,8 @@ public class Autonomous {
 
 	public void autonSix()
 	{
-		while(Robot.state.infared[1].get())
-		{
-			elevator.elevator.set(1);
-		}
-		drive.move(BETW_AUTO_TOTES * MULTIPLIER, AUTON_SPEED_MOD);
+		elevator.goTo(1);
+		drive.move(BETW_AUTO_TOTES, AUTON_SPEED_MOD);
 		start = (float) Robot.state.time.get();
 		while(lowerTime < 2)
 		{
