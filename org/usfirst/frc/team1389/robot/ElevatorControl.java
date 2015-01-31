@@ -48,7 +48,6 @@ public class ElevatorControl extends Component{
 		}
 		elevator.set(whereToGo(loc, lastSensor) * Constants.ELEVATOR_SPEED_MOD);
 	}
-	
 	public void move(double direction){
 		going=false;
 		DigitalInput[] sensors=Robot.state.infared;
@@ -83,6 +82,7 @@ public class ElevatorControl extends Component{
 			going=false;
 			return 0;
 		}
-
 	}	
+	
+	
 }

@@ -19,18 +19,21 @@ public class PosTrack extends Component{
 
 	Timer time = Robot.state.time;
 	double angle;//degrees
+	double heading;
 	double dt = 0;
 	double t1 = 0;
 	double aX, aY, velX, velY, posX, posY;
 	double distance;
+	final double offset;
 	public PosTrack(){
-		angle=imu.getCompassHeading();
+		resetAngle();
+		offset = imu.getYaw();
+		resetDistance();
 		time = Robot.state.time;
 		velX=0;
 		velY=0;
 		posX=0;
 		posY=0;
-		distance=0;
 	}
 	
 	@Override
@@ -41,8 +44,8 @@ public class PosTrack extends Component{
 		aY = (float) (imu.getWorldLinearAccelX() * 9.8 * Math.sin(Math.toRadians(imu.getYaw()) + imu.getWorldLinearAccelY() * 9.8 * Math.sin(Math.toRadians(imu.getYaw()))));
 		velX += aX * dt;
 		velY += aY * dt;
-		
-		angle+=imu.getYaw();
+		heading+=imu.getYaw();
+		angle = imu.getYaw() - offset;
 		
 		
 		//Double integrate accelerometer readings (dx = Vdt + 1/2at^2)
@@ -70,7 +73,7 @@ public class PosTrack extends Component{
 	public void resetAngle(){
 		angle=0;
 	}
-	public void resetDistanceTravelled(){
+	public void resetDistance(){
 		distance=0;
 	}
 
