@@ -13,11 +13,13 @@ public class DriveControl extends Component{
 	double leftCoef;
 	double rightCoef;
 	int rampUpState;
+	PosTrack pos;
 	final boolean encoderVerified=true;
 
 	double actualLeft = 0, actualRight = 0;
 	
-	public DriveControl() {
+	public DriveControl(PosTrack pos) {
+		this.pos=pos;
 		rampUpState=COMPUTER_ASSISTED;
 		leftCoef=1;
 		rightCoef=1;
@@ -141,7 +143,7 @@ public class DriveControl extends Component{
 	
 	public void IRStop()
 	{
-		if(!Robot.state.contactSensor)
+		if(!Robot.state.contactSensor.get())
 		{
 			actualLeft = 0;
 			actualRight = 0;
@@ -150,11 +152,23 @@ public class DriveControl extends Component{
 	/**
 	 * autonomous drive system
 	 * @param distance the distance to drive
-	 * @param speed min:0 max:1
+	 * @param speed min:-1 max:1 - numbers cause robot to go backward
 	 * simulates xbox control stick
 	 */
-	private void forward(double distance, double speed){
-	
+
+	private double move(double distance, double speed){
+		if(pos.distance>=distance)return distance;
+		else{
+			drive(speed,0);
+			return move(distance,speed);
+		}
+	}
+	private double turn(double angle){
+		if(pos.angle>=angle)return angle;
+		else{
+			drive(0,Math.abs(angle)/angle);
+			return turn(angle);
+		}
 	}
 	
 	/**
