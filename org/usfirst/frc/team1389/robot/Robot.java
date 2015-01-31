@@ -25,6 +25,7 @@ public class Robot extends SampleRobot {
 	//instance variables
 	final int autonomousState = 1;
 	static ArrayList<Component> components;
+	
 
 	static InputState state;
 	final static int DRIVE=2,ELEVATOR=0,POS=1;
