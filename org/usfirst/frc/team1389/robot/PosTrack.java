@@ -18,16 +18,17 @@ public class PosTrack extends Component{
     IMUAdvanced imu = Robot.state.imu;
 
 	Timer time = Robot.state.time;
-	float dt = 0;
-	float t1 = 0;
-	float aX, aY, velX, velY, posX, posY;
-	
+	double dt = 0;
+	double t1 = 0;
+	double aX, aY, velX, velY, posX, posY;
+	double distance;
 	public PosTrack(){
 		time = Robot.state.time;
 		velX=0;
 		velY=0;
 		posX=0;
 		posY=0;
+		distance=0;
 	}
 	
 	@Override
@@ -46,6 +47,9 @@ public class PosTrack extends Component{
 		posX += (velX * dt) + (.5 * aX * Math.pow(dt, 2));
 		posY += (velY * dt) + (.5 * aY * Math.pow(dt, 2));
 		
+		distance=Math.sqrt((posX*posX)+(posY*posY));
+		
+		SmartDashboard.putNumber("distance", distance);
 		SmartDashboard.putNumber("velX", velX);
 		SmartDashboard.putNumber("velY", velY);
 		SmartDashboard.putNumber("X Displacment", posX);
