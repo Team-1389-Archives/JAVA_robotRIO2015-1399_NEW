@@ -67,6 +67,12 @@ public class PosTrack extends Component{
 	public void autonTick() {
 		teleopTick();
 	}
+	public void resetAngle(){
+		angle=0;
+	}
+	public void resetDistanceTravelled(){
+		distance=0;
+	}
 
 
 }
