@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class Autonomous {
 	
 	//These constants hold relevant distances we need to travel in inches
-	private final double MULTIPLIER=0.0254*16;//inches->meters conversion * 1/16 scale model conversion
-	private final double STAG_TO_AUTO = 80; //Distance from in front of AutoTotes -> AutoZone.
-	private final double BETW_AUTO_TOTES = 85; //Distance to travel inbetween auto totes when picking up all totes
+	private final double MULTIPLIER=0.0254;//inches->meters conversion
+	private final double TAPE_TO_LANDMARK = 80; //Distance from in front of AutoTotes -> AutoZone.
+	private final double STAGING_ZONE_WIDTH=48;//length down the field of yellow crate zone
+	private final double STAGING_ZONE_LENGTH=9;//width of yellow crate zone
+	private final double BETW_AUTO_TOTES = 33; //Distance to travel inbetween auto totes when picking up all totes
 	
 	private DriveControl drive;
 	private ElevatorControl elevator;
@@ -33,7 +35,9 @@ public class Autonomous {
 
 	public void autonOne()
 	{
-		
+		final double crateCarryDistance=(TAPE_TO_LANDMARK+STAGING_ZONE_LENGTH)*MULTIPLIER;
+		elevator.goTo(1);
+		drive.move(crateCarryDistance,1);
 	}
 
 	public void autonTwo()
