@@ -110,6 +110,7 @@ public class DriveControl extends Component{
 			rightCoef*=Math.abs(error)*multiplier;
 		}
 	}
+	
 
 	@Override
 	public void teleopConfig(){}
@@ -138,12 +139,23 @@ public class DriveControl extends Component{
 		}
 		drive(Robot.state.drive.getLeftX(), Robot.state.drive.getLeftY() * -1); 
 	}
+	
+	
+	public void IRStop()
+	{
+		if(!Robot.state.contactSensor.get())
+		{
+			actualLeft = 0;
+			actualRight = 0;
+		}
+	}
 	/**
 	 * autonomous drive system
 	 * @param distance the distance to drive
 	 * @param speed min:-1 max:1 - numbers cause robot to go backward
 	 * simulates xbox control stick
 	 */
+
 	private double move(double distance, double speed){
 		if(pos.distance>=distance)return distance;
 		else{
