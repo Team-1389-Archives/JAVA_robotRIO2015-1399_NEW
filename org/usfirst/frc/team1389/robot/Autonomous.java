@@ -65,8 +65,7 @@ public class Autonomous {
 		elevator.goTo(0);
 		drive.turn(-90);
 		drive.move(distance2, AUTON_SPEED_MOD);
-		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
-		
+		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);		
 	}
 
 	public void autonFour()
@@ -109,14 +108,17 @@ public class Autonomous {
 	public void autonEight()
 	{
 		elevator.goTo(1);
+		while(!elevator.going);
 		drive.move(BETW_AUTO_TOTES, AUTON_SPEED_MOD);
 		elevator.goTo(0);
 		while(!elevator.going);
 		elevator.goTo(1);
-		drive.move(BETW_AUTO_TOTES, AUTON_SPEED_MOD);
+		while(!elevator.going);
+		drive.move(BETW_AUTO_TOTES * MULTIPLIER, AUTON_SPEED_MOD);
 		elevator.goTo(0);
 		while(!elevator.going);
 		elevator.goTo(1);
+		while(!elevator.going);
 		drive.turn(-90);
 		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
 
