@@ -141,14 +141,6 @@ public class DriveControl extends Component{
 	}
 	
 	
-	public void IRStop()
-	{
-		if(!Robot.state.contactSensor.get())
-		{
-			actualLeft = 0;
-			actualRight = 0;
-		}
-	}
 	/**
 	 * autonomous drive system
 	 * @param distance the distance to drive
@@ -158,10 +150,11 @@ public class DriveControl extends Component{
 
 	public double move(double distance, double speed){
 		if(pos.distance>=distance)return distance;
-		else{
+		else if (Robot.state.contactSensor.get()){
 			drive(speed,0);
 			return move(distance,speed);
 		}
+		return 0;
 	}
 	public double turn(double angle){
 		if(pos.angle>=angle)return angle;

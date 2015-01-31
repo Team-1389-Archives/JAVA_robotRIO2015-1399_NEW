@@ -48,7 +48,8 @@ public class Autonomous {
 
 	public void autonThree()
 	{
-
+		
+		
 	}
 
 	public void autonFour()
@@ -99,7 +100,6 @@ public class Autonomous {
 		{
 			elevator.elevator.set(1);
 		}
-		
 		drive.turn(-90);
 		drive.move(STAG_TO_AUTO * MULTIPLIER, AUTON_SPEED_MOD);
 
