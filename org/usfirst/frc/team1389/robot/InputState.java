@@ -6,6 +6,11 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.visa.VisaException;
+
+import com.kauailabs.nav6.frc.BufferingSerialPort;
+import com.kauailabs.nav6.frc.IMU;
+import com.kauailabs.nav6.frc.IMUAdvanced;
 
 public class InputState implements Cloneable{
 	public XBoxController drive;
@@ -14,7 +19,11 @@ public class InputState implements Cloneable{
 	public Encoder encoder1;
 	public Encoder encoder2;
 	
-	public BuiltInAccelerometer accel;
+	
+	public BufferingSerialPort serial_port;
+    public IMUAdvanced imu;
+    
+
 	public Gyro gyro;
 	
 	public DigitalInput limit1;
@@ -26,9 +35,17 @@ public class InputState implements Cloneable{
 	
 	public InputState(){
 		
-		accel = new BuiltInAccelerometer();
+		//Init IMU
+		try {
+			serial_port = new BufferingSerialPort(57600);
+		} catch (VisaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 imu = new IMUAdvanced(serial_port);
+		 
+
 		
-		gyro = new Gyro(Constants.GYRO);
 		
 		time = new Timer();
 		time.start();

@@ -62,7 +62,7 @@ public class XBoxController implements Cloneable{
 	public double getLeftY() {
 		return leftY;
 	}
-	public double getLeftX() {
+	public double getLeftX() {  
 		return leftX;
 	}
 	public boolean isLeftTrigger() {
