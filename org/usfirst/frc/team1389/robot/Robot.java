@@ -20,8 +20,9 @@ public class Robot extends SampleRobot {
 	
 	//instance variables
 	final int autonomousState=1;
-	ArrayList<Component> components;
+	static ArrayList<Component> components;
 	static InputState state;
+	final static int DRIVE=2,ELEVATOR=0,POS=1;
 	
 	
 	/**
@@ -32,9 +33,9 @@ public class Robot extends SampleRobot {
 	{
 		state= new InputState();
 		components = new ArrayList<Component>();
-		components.add(new DriveControl());
 		components.add(new ElevatorControl());
 		components.add(new PosTrack());
+		components.add(new DriveControl((PosTrack)(components.get(POS))));
 	}
 	
 	
@@ -80,4 +81,7 @@ public class Robot extends SampleRobot {
 	 * Autonomous configuration
 	 * Update each component through the ".autonTick()" method
 	 */
+	public static Component getComponent(int index){
+		return components.get(index);
+	}
 }

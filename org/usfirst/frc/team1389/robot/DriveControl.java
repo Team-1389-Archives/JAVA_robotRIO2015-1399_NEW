@@ -13,11 +13,13 @@ public class DriveControl extends Component{
 	double leftCoef;
 	double rightCoef;
 	int rampUpState;
+	PosTrack pos;
 	final boolean encoderVerified=true;
 
 	double actualLeft = 0, actualRight = 0;
 	
-	public DriveControl() {
+	public DriveControl(PosTrack pos) {
+		this.pos=pos;
 		rampUpState=COMPUTER_ASSISTED;
 		leftCoef=1;
 		rightCoef=1;
@@ -142,8 +144,12 @@ public class DriveControl extends Component{
 	 * @param speed min:0 max:1
 	 * simulates xbox control stick
 	 */
-	private void forward(double distance, double speed){
-		if(IMU)
+	private double forward(double distance, double speed){
+		if(pos.distance>=distance)return distance;
+		else{
+			drive(speed,0);
+			return forward(distance,speed);
+		}
 	}
 	
 	/**
