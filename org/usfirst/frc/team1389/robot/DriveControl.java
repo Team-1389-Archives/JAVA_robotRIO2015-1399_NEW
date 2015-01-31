@@ -136,6 +136,15 @@ public class DriveControl extends Component{
 		}
 		drive(Robot.state.drive.getLeftX(), Robot.state.drive.getLeftY() * -1); 
 	}
+	/**
+	 * autonomous drive system
+	 * @param distance the distance to drive
+	 * @param speed min:0 max:1
+	 * simulates xbox control stick
+	 */
+	private void forward(double distance, double speed){
+		if(IMU)
+	}
 	
 	/**
 	 * Drive train Autonomous setup
