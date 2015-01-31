@@ -156,14 +156,14 @@ public class DriveControl extends Component{
 	 * simulates xbox control stick
 	 */
 
-	private double move(double distance, double speed){
+	public double move(double distance, double speed){
 		if(pos.distance>=distance)return distance;
 		else{
 			drive(speed,0);
 			return move(distance,speed);
 		}
 	}
-	private double turn(double angle){
+	public double turn(double angle){
 		if(pos.angle>=angle)return angle;
 		else{
 			drive(0,Math.abs(angle)/angle);

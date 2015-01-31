@@ -37,7 +37,7 @@ public class ElevatorControl extends Component{
  	* @param loc level to go to
  	* @param sensors array of infared sensors
 	*/
-	private void goTo(int loc,DigitalInput[] sensors){
+	public void goTo(int loc,DigitalInput[] sensors){
 		int lastSensor=0;
 		for(int d=0;d<sensors.length;d++){
 			if(!sensors[d].get())lastSensor=d;
@@ -45,7 +45,7 @@ public class ElevatorControl extends Component{
 		elevator.set(whereToGo(loc, lastSensor) * Constants.ELEVATOR_SPEED_MOD);
 	}
 	
-	private void move(int direction, DigitalInput[] sensors){
+	public void move(int direction, DigitalInput[] sensors){
 		int dir=0;
 		if (direction==1&&!sensors[4].get())
 		{
@@ -77,6 +77,7 @@ public class ElevatorControl extends Component{
 			going=false;
 			return 0;
 		}
-
 	}	
+	
+	
 }
