@@ -50,6 +50,7 @@ public class Robot extends SampleRobot {
 	public void operatorControl()
 	{
 		for (Component c: components){
+			
 			c.teleopConfig();
 		}
 		while (isOperatorControl())
