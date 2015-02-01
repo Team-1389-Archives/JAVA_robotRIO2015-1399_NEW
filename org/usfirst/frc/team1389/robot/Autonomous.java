@@ -16,8 +16,10 @@ public class Autonomous {
 	private final double TOTE_WIDTH = 26.9*MULTIPLIER; //width of a tote
 	private final double LANDFILL_TO_SCORING = 51.2*MULTIPLIER; //distance from two totes in landfill to white scoring platform
 	private final double LANDFILL_TO_AUTON = 54.5*MULTIPLIER; //distance from white scoring platform to middle of auton zone
+	private final double AUTONTOTE_TO_LANDFILLTOTE = 12*MULTIPLIER; //offset from auton tote to landfill totes
 	private final double OVERHANG = 13.5*MULTIPLIER; //distance past chassis of lift arm
 	private final double timePerLevel=1.5;
+	private final double ElevatorLevelToDrag=-12;
 	private DriveControl drive;
 	private ElevatorControl elevator;
 	private PosTrack pos;
@@ -40,25 +42,34 @@ public class Autonomous {
 		default: break;
 		}
 	}
-
+	
+	/**
+	 * drive the bot into the autonomous zone
+	 */
 	public void autonOne()
 	{
 		drive.move(TAPE_TO_LANDMARK,AUTON_SPEED_MOD);
 	}
 
+	/**
+	 * push a single auton crate into the autonomous zone
+	 */
 	public void autonTwo()
 	{
 		double crateCarryDistance=(TAPE_TO_LANDMARK+STAGING_ZONE_LENGTH);
 		drive.move(crateCarryDistance,AUTON_SPEED_MOD);
 	}
-
+	
+	/**
+	 *collect a container and an auton tote and carry them into the auton zone 
+	 */
 	public void autonThree()
 	{
 		double distance1=TAPE_TO_DRIVER-13.5;
 		double distance2=distance1-12;
 		drive.move(distance1,AUTON_SPEED_MOD);
 		elevator.goTo(4);
-		while(!elevator.going);
+		while(elevator.going);
 		drive.move(12*MULTIPLIER,-AUTON_SPEED_MOD);
 		drive.turn(-90);
 		drive.move(TOTE_WIDTH/3, AUTON_SPEED_MOD);
@@ -67,19 +78,40 @@ public class Autonomous {
 		drive.move(distance2, AUTON_SPEED_MOD);
 		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);		
 	}
-
+	
+	/**
+	 * drag 2 grey totes from the landfill into scoring zone and continue into the auton zone
+	 */
 	public void autonFour()
 	{
+		elevator.goTo(1);//TODO allow elevator to go to a drag level
+		while(elevator.going);
 		drive.move(LANDFILL_TO_SCORING, -AUTON_SPEED_MOD);
 		elevator.goTo(2);
 		wait(.5);
 		drive.move(LANDFILL_TO_AUTON, -AUTON_SPEED_MOD);
 	}
-
+	
+	/**
+	 * push a yellow tote into auton zone, continue to do auton four
+	 */
 	public void autonFive()
 	{
-
+		double distance1=TAPE_TO_LANDMARK+STAGING_ZONE_LENGTH;
+		double distance2=LANDFILL_TO_AUTON+12*MULTIPLIER;
+		drive.move(distance1, AUTON_SPEED_MOD*(2/3));
+		drive.move(12*MULTIPLIER, -AUTON_SPEED_MOD);
+		drive.turn(-90);
+		drive.move(AUTONTOTE_TO_LANDFILLTOTE,AUTON_SPEED_MOD);
+		drive.turn(90);
+		elevator.goTo(2);
+		drive.move(distance2,AUTON_SPEED_MOD);
+		autonFour();
 	}
+	
+	/**
+	 * zigzag, picking up a stack of all 3 yellow totes and bringing them into auton zone
+	 */
 	public void autonSix()
 	{
 		double angle=35;
@@ -88,7 +120,7 @@ public class Autonomous {
 		for(int x=1;x<=2;x++){
 		drive.move(OVERHANG, AUTON_SPEED_MOD);
 		elevator.goTo(0);
-		while(!elevator.going);
+		while(elevator.going);
 		elevator.goTo(1);
 		wait(timePerLevel/3);
 		drive.turn(angle);
@@ -105,38 +137,46 @@ public class Autonomous {
 		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
 
 	}
-	public void autonEight()
-	{
-		elevator.goTo(1);
-		while(!elevator.going);
-		drive.move(BETW_AUTO_TOTES, AUTON_SPEED_MOD);
-		elevator.goTo(0);
-		while(!elevator.going);
-		elevator.goTo(1);
-		while(!elevator.going);
-		drive.move(BETW_AUTO_TOTES * MULTIPLIER, AUTON_SPEED_MOD);
-		elevator.goTo(0);
-		while(!elevator.going);
-		elevator.goTo(1);
-		while(!elevator.going);
-		drive.turn(-90);
-		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
-
-	}
-
+	
+	/**
+	 * carry 2 trash cans into auton zone
+	 */
 	public void autonSeven()
 	{
 		double distance1=TAPE_TO_DRIVER-OVERHANG;
 		double distance2=distance1-12+TAPE_TO_LANDMARK;
 		drive.move(distance1,AUTON_SPEED_MOD);
 		elevator.goTo(5);
-		while(!elevator.going);
+		while(elevator.going);
 		drive.move(12*MULTIPLIER,-AUTON_SPEED_MOD);
 		drive.turn(90);
 		drive.move(BETW_AUTO_TOTES, AUTON_SPEED_MOD);
 		drive.turn(90);
 		drive.move(distance2, AUTON_SPEED_MOD);
 	}
+	
+	/**
+	 * auton six, except knocking trash cans out of the way instead of avoiding them
+	 */
+	public void autonEight()
+	{
+		elevator.goTo(1);
+		while(elevator.going);
+		drive.move(BETW_AUTO_TOTES, AUTON_SPEED_MOD);
+		elevator.goTo(0);
+		while(elevator.going);
+		elevator.goTo(1);
+		while(elevator.going);
+		drive.move(BETW_AUTO_TOTES * MULTIPLIER, AUTON_SPEED_MOD);
+		elevator.goTo(0);
+		while(elevator.going);
+		elevator.goTo(1);
+		while(elevator.going);
+		drive.turn(-90);
+		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
+
+	}
+
 	public void wait(double time){
 		//TODO
 	}
