@@ -19,9 +19,7 @@ public class Autonomous {
 	LANDFILL_TO_SCORING = 		51.2	*MULTIPLIER, 	//distance from two totes in landfill to white scoring platform
 	LANDFILL_TO_AUTON = 		54.5	*MULTIPLIER, 	//distance from white scoring platform to middle of auton zone
 	AUTONTOTE_TO_LANDFILLTOTE = 12		*MULTIPLIER, 	//offset from auton tote to landfill totes
-	OVERHANG = 					13.5	*MULTIPLIER, 	//distance past chassis of lift arm
-	
-	timePerLevel=1.5;
+	OVERHANG = 					13.5	*MULTIPLIER; 	//distance past chassis of lift arm
 	
 	private DriveControl drive;
 	private ElevatorControl elevator;
@@ -87,11 +85,8 @@ public class Autonomous {
 	 */
 	public void autonFour()
 	{
-		elevator.goTo(1);//TODO allow elevator to go to a drag level
-		
 		drive.move(LANDFILL_TO_SCORING, -AUTON_SPEED_MOD);
 		elevator.goTo(2);
-		wait(.5);
 		drive.move(LANDFILL_TO_AUTON, -AUTON_SPEED_MOD);
 	}
 	
@@ -125,7 +120,6 @@ public class Autonomous {
 		elevator.goTo(0);
 		
 		elevator.goTo(1);
-		wait(timePerLevel/3);
 		drive.turn(angle);
 		drive.move(distance1, AUTON_SPEED_MOD);
 		drive.turn(angle-90);
@@ -135,7 +129,6 @@ public class Autonomous {
 		drive.move(OVERHANG, AUTON_SPEED_MOD);
 		elevator.goTo(0);
 		elevator.goTo(1);
-		wait(timePerLevel/3);
 		drive.turn(-90);
 		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
 
@@ -179,10 +172,4 @@ public class Autonomous {
 		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
 
 	}
-
-	public void wait(double time){
-		//TODO
-	}
-
-
 }
