@@ -97,10 +97,18 @@ public class DriveControl extends Component{
 		}
 		return actualPower;
 	}
-	private void VerifyVelocity(double leftVel, double rightVel,
+	
+	/**
+	 * uses encoders to verify that the robot is going straight
+	 * @param leftPow left input power
+	 * @param rightPow right input power
+	 * @param encoder1 left encoder (output power)
+	 * @param encoder2 right encoder (output power)
+	 */
+	private void VerifyVelocity(double leftPow, double rightPow,
 			Encoder encoder1, Encoder encoder2) {
 		final double multiplier=1;
-		double error=(leftVel/rightVel)-(encoder1.getRate()/encoder2.getRate());
+		double error=(leftPow/rightPow)-(encoder1.getRate()/encoder2.getRate());
 		if(error>0){//turning desired direction too fast
 			leftCoef*=Math.abs(error)*multiplier;
 			rightCoef/=Math.abs(error)*multiplier;
@@ -140,9 +148,8 @@ public class DriveControl extends Component{
 		drive(Robot.state.drive.getLeftX(), Robot.state.drive.getLeftY() * -1); 
 	}
 	
-	
 	/**
-	 * autonomous drive system
+	* autonomous drive system
 	 * @param distance the distance to drive
 	 * @param speed min:-1 max:1 - numbers cause robot to go backward
 	 * simulates xbox control stick
@@ -171,8 +178,8 @@ public class DriveControl extends Component{
 	public void autonConfig(){}
 
 	/**
-	 * Instructions for drive train at each autonomous tick. 
-	 */
+	* Instructions for drive train at each autonomous tick. 
+	*/
 	@Override
 	public void autonTick(){}
 	@Override	

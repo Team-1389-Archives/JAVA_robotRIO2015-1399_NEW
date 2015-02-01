@@ -7,19 +7,22 @@ public class Autonomous {
 	private final double AUTON_SPEED_MOD = 1;
 
 	//These constants hold relevant distances we need to travel in inches
-	private final double MULTIPLIER=0.0254;//inches->meters conversion
-	private final double TAPE_TO_LANDMARK = 107*MULTIPLIER; //Distance from in front of AutoTotes -> AutoZone.
-	private final double STAGING_ZONE_WIDTH=48*MULTIPLIER;//length down the field of yellow crate zone
-	private final double STAGING_ZONE_LENGTH=23*MULTIPLIER;//width of yellow crate zone
-	private final double BETW_AUTO_TOTES = 33*MULTIPLIER; //Distance to travel in between auto totes when picking up all totes
-	private final double TAPE_TO_DRIVER = 76*MULTIPLIER; //Distance to from down-field edge of staging zone to driver station
-	private final double TOTE_WIDTH = 26.9*MULTIPLIER; //width of a tote
-	private final double LANDFILL_TO_SCORING = 51.2*MULTIPLIER; //distance from two totes in landfill to white scoring platform
-	private final double LANDFILL_TO_AUTON = 54.5*MULTIPLIER; //distance from white scoring platform to middle of auton zone
-	private final double AUTONTOTE_TO_LANDFILLTOTE = 12*MULTIPLIER; //offset from auton tote to landfill totes
-	private final double OVERHANG = 13.5*MULTIPLIER; //distance past chassis of lift arm
-	private final double timePerLevel=1.5;
-	private final double ElevatorLevelToDrag=-12;
+	
+	private final double 
+	MULTIPLIER=					0.0254,					//inches->meters conversion
+	TAPE_TO_LANDMARK = 			107		*MULTIPLIER, 	//Distance from in front of AutoTotes -> AutoZone.
+	STAGING_ZONE_WIDTH=			48		*MULTIPLIER,	//length down the field of yellow crate zone
+	STAGING_ZONE_LENGTH=		23		*MULTIPLIER,	//width of yellow crate zone
+	BETW_AUTO_TOTES = 			33		*MULTIPLIER, 	//Distance to travel in between auto totes when picking up all totes
+	TAPE_TO_DRIVER = 			76		*MULTIPLIER, 	//Distance to from down-field edge of staging zone to driver station
+	TOTE_WIDTH = 				26.9	*MULTIPLIER, 	//width of a tote
+	LANDFILL_TO_SCORING = 		51.2	*MULTIPLIER, 	//distance from two totes in landfill to white scoring platform
+	LANDFILL_TO_AUTON = 		54.5	*MULTIPLIER, 	//distance from white scoring platform to middle of auton zone
+	AUTONTOTE_TO_LANDFILLTOTE = 12		*MULTIPLIER, 	//offset from auton tote to landfill totes
+	OVERHANG = 					13.5	*MULTIPLIER, 	//distance past chassis of lift arm
+	
+	timePerLevel=1.5;
+	
 	private DriveControl drive;
 	private ElevatorControl elevator;
 	private PosTrack pos;
@@ -69,7 +72,7 @@ public class Autonomous {
 		double distance2=distance1-12;
 		drive.move(distance1,AUTON_SPEED_MOD);
 		elevator.goTo(4);
-		while(elevator.going);
+		
 		drive.move(12*MULTIPLIER,-AUTON_SPEED_MOD);
 		drive.turn(-90);
 		drive.move(TOTE_WIDTH/3, AUTON_SPEED_MOD);
@@ -85,7 +88,7 @@ public class Autonomous {
 	public void autonFour()
 	{
 		elevator.goTo(1);//TODO allow elevator to go to a drag level
-		while(elevator.going);
+		
 		drive.move(LANDFILL_TO_SCORING, -AUTON_SPEED_MOD);
 		elevator.goTo(2);
 		wait(.5);
@@ -120,7 +123,7 @@ public class Autonomous {
 		for(int x=1;x<=2;x++){
 		drive.move(OVERHANG, AUTON_SPEED_MOD);
 		elevator.goTo(0);
-		while(elevator.going);
+		
 		elevator.goTo(1);
 		wait(timePerLevel/3);
 		drive.turn(angle);
@@ -147,7 +150,7 @@ public class Autonomous {
 		double distance2=distance1-12+TAPE_TO_LANDMARK;
 		drive.move(distance1,AUTON_SPEED_MOD);
 		elevator.goTo(5);
-		while(elevator.going);
+		
 		drive.move(12*MULTIPLIER,-AUTON_SPEED_MOD);
 		drive.turn(90);
 		drive.move(BETW_AUTO_TOTES, AUTON_SPEED_MOD);
@@ -161,17 +164,17 @@ public class Autonomous {
 	public void autonEight()
 	{
 		elevator.goTo(1);
-		while(elevator.going);
+		
 		drive.move(BETW_AUTO_TOTES, AUTON_SPEED_MOD);
 		elevator.goTo(0);
-		while(elevator.going);
+		
 		elevator.goTo(1);
-		while(elevator.going);
+		
 		drive.move(BETW_AUTO_TOTES * MULTIPLIER, AUTON_SPEED_MOD);
 		elevator.goTo(0);
-		while(elevator.going);
+		
 		elevator.goTo(1);
-		while(elevator.going);
+		
 		drive.turn(-90);
 		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
 

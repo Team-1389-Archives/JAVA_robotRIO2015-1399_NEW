@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends SampleRobot {
 	
 	//instance variables
+	static boolean isAuton;
 	static ArrayList<Component> components;
 	static InputState state;
 	final static int DRIVE=2,ELEVATOR=0,POS=1;
@@ -49,6 +50,7 @@ public class Robot extends SampleRobot {
 	 */
 	public void operatorControl()
 	{
+		isAuton=false;
 		for (Component c: components){
 			
 			c.teleopConfig();
@@ -66,6 +68,7 @@ public class Robot extends SampleRobot {
 
 	@Override
 	public void autonomous(){
+		isAuton=true;
 		Autonomous auton=new Autonomous(1, components);
 	}
 

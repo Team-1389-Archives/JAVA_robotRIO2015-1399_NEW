@@ -30,6 +30,9 @@ public class ElevatorControl extends Component{
 		if(!going)goTo(goToPosition);
 		SmartDashboard.putBoolean("IR One value", Robot.state.infared[0].get());
 	}
+	
+	public void autonTick(){
+	}
 
 	
 	//Our IR sensors output low when an object is within 2cm - 10cm of an object (e. g. !IRa.get() equates to true when there is an object in front of sensor one) 
@@ -47,6 +50,9 @@ public class ElevatorControl extends Component{
 			if(!sensors[d].get())lastSensor=d;
 		}
 		elevator.set(whereToGo(loc, lastSensor) * Constants.ELEVATOR_SPEED_MOD);
+		if(going&&Robot.isAuton){
+			goTo(loc);
+		}
 	}
 	public void move(double direction){
 		going=false;
