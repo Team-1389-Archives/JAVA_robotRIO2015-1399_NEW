@@ -6,26 +6,28 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.kauailabs.nav6.frc.BufferingSerialPort;
-import com.kauailabs.nav6.frc.IMU;
-import com.kauailabs.nav6.frc.IMUAdvanced;
+//import com.kauailabs.nav6.frc.BufferingSerialPort;
+//import com.kauailabs.nav6.frc.IMU;
+//import com.kauailabs.nav6.frc.IMUAdvanced;
 
 
 public class PosTrack extends Component{
 
 	
-	BufferingSerialPort serial_port = Robot.state.serial_port;
-    IMUAdvanced imu = Robot.state.imu;
+//BufferingSerialPort serial_port = Robot.state.serial_port;
+    //IMUAdvanced imu = Robot.state.imu;
 
-	Timer time = Robot.state.time;
+	//Timer time = Robot.state.time;
 	double angle;//degrees
-	double heading;
-	double dt = 0;
-	double t1 = 0;
-	double aX, aY, velX, velY, posX, posY;
+//	double heading;
+	//double dt = 0;
+	//double t1 = 0;
+	//double aX, aY, velX, velY, posX, posY;
 	double distance;
-	final double offset;
+	//final double offset;
+	
 	public PosTrack(){
+		/*
 		resetAngle();
 		offset = imu.getYaw();
 		resetDistance();
@@ -34,10 +36,12 @@ public class PosTrack extends Component{
 		velY=0;
 		posX=0;
 		posY=0;
+		*/
 	}
 	
 	@Override
 	public void teleopTick() {
+		/*
 		dt = (float) (time.get() - t1);
 		t1 = (float) time.get();
 		aX = (float) (imu.getWorldLinearAccelX() * 9.8 * Math.cos(Math.toRadians(imu.getYaw()) + imu.getWorldLinearAccelY() * 9.8 * Math.cos(Math.toRadians(imu.getYaw()))));
@@ -63,6 +67,7 @@ public class PosTrack extends Component{
 		SmartDashboard.putNumber("accelY", aY);
 		SmartDashboard.putNumber("dt", dt);
 		SmartDashboard.putNumber("t1", t1);
+		*/
 	}
 
 	
@@ -71,10 +76,10 @@ public class PosTrack extends Component{
 		teleopTick();
 	}
 	public void resetAngle(){
-		angle=0;
+		//angle=0;
 	}
 	public void resetDistance(){
-		distance=0;
+		//distance=0;
 	}
 
 
