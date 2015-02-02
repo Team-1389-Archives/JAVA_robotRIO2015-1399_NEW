@@ -44,7 +44,7 @@ public class PosTrack extends Component{
 		aY = (float) (imu.getWorldLinearAccelX() * 9.8 * Math.sin(Math.toRadians(imu.getYaw()) + imu.getWorldLinearAccelY() * 9.8 * Math.sin(Math.toRadians(imu.getYaw()))));
 		velX += aX * dt;
 		velY += aY * dt;
-		heading+=imu.getYaw();
+		heading = imu.getYaw();
 		angle = imu.getYaw() - offset;
 		
 		
@@ -52,7 +52,7 @@ public class PosTrack extends Component{
 		posX += (velX * dt) + (.5 * aX * Math.pow(dt, 2));
 		posY += (velY * dt) + (.5 * aY * Math.pow(dt, 2));
 		
-		distance=Math.sqrt((posX*posX)+(posY*posY));
+		distance += Math.sqrt(Math.pow(((velX * dt) + (.5 * aX * Math.pow(dt, 2))), 2) + Math.pow(((velY * dt) + (.5 * aY * Math.pow(dt, 2))), 2));
 		
 		SmartDashboard.putNumber("distance", distance);
 		SmartDashboard.putNumber("velX", velX);

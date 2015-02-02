@@ -14,6 +14,8 @@ public class DriveControl extends Component{
 	double rightCoef;
 	int rampUpState;
 	PosTrack pos;
+	int moveCount = 0;
+	int turnCount = 0;
 	final boolean encoderVerified=true;
 
 	double actualLeft = 0, actualRight = 0;
@@ -156,10 +158,20 @@ public class DriveControl extends Component{
 	 */
 
 	public double move(double distance, double speed){
-		if(pos.distance>=distance)return distance;
+		if (moveCount == 0)
+		{
+			pos.resetDistance();
+		if(pos.distance>=distance)
+			{
+			moveCount++;
+			return distance;
+			
+			}
 		else if (Robot.state.contactSensor.get()){
 			drive(speed,0);
+			moveCount++;
 			return move(distance,speed);
+		}
 		}
 		return 0;
 	}
