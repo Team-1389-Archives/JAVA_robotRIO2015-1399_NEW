@@ -54,15 +54,6 @@ public class PosTrack extends Component{
 		
 		distance=Math.sqrt((posX*posX)+(posY*posY));
 		
-		SmartDashboard.putNumber("distance", distance);
-		SmartDashboard.putNumber("velX", velX);
-		SmartDashboard.putNumber("velY", velY);
-		SmartDashboard.putNumber("X Displacment", posX);
-		SmartDashboard.putNumber("Y Displacment", posY);
-		SmartDashboard.putNumber("accelX", aX);
-		SmartDashboard.putNumber("accelY", aY);
-		SmartDashboard.putNumber("dt", dt);
-		SmartDashboard.putNumber("t1", t1);
 	}
 
 	

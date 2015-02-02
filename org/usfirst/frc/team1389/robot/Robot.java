@@ -40,6 +40,7 @@ public class Robot extends SampleRobot {
 		components.add(new ElevatorControl());
 		components.add(new PosTrack());
 		components.add(new DriveControl((PosTrack)(components.get(POS))));
+		components.add(new SmartGUI());
 		
 	}
 	

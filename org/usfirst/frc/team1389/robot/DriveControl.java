@@ -13,6 +13,8 @@ public class DriveControl extends Component{
 	double leftCoef;
 	double rightCoef;
 	int rampUpState;
+	//Added rampUp String variable 2/2/2015 Daniel Park
+	String rampUp;
 	PosTrack pos;
 	final boolean encoderVerified=true;
 
@@ -21,6 +23,8 @@ public class DriveControl extends Component{
 	public DriveControl(PosTrack pos) {
 		this.pos=pos;
 		rampUpState=COMPUTER_ASSISTED;
+		//made rampup into null. Daniel park same date
+		rampUp="";
 		leftCoef=1;
 		rightCoef=1;
 		RFDrive = new Talon(Constants.RF_PWM_DRIVE);
@@ -58,7 +62,6 @@ public class DriveControl extends Component{
 			rightPower*=rightCoef;
 		}
 
-		SmartDashboard.putNumber("Power", (double)((int)(100*((actualLeft + actualRight) / 2)))/100);
 	}
 
 	/**
@@ -129,7 +132,8 @@ public class DriveControl extends Component{
 	@Override
 	public void teleopTick()
 	{
-		String rampUp = null;
+		//took out String from String rampUp=null; 2/2/2015 Daniel Park
+		rampUp = null;
 		switch(rampUpState){
 			case STRICT_COMPUTER:rampUp="Strict";
 			break;
@@ -139,8 +143,6 @@ public class DriveControl extends Component{
 			break;
 			default:rampUp="null";
 		}
-		SmartDashboard.putString("RampUp", rampUp);
-		SmartDashboard.putNumber("state", rampUpState);
 		if(Robot.state.drive.isBPressed()){
 			rampUpState++;
 			rampUpState%=3;
