@@ -70,7 +70,6 @@ public class PosTrack extends Component{
 		SmartDashboard.putNumber("dt", dt);
 		SmartDashboard.putNumber("t1", t1);
 		*/
->>>>>>> d818a20ca172738dc11dea5b40144396f6b69116
 	}
 
 	

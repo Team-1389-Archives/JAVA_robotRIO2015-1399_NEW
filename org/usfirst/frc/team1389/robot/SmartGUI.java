@@ -21,6 +21,7 @@ public class SmartGUI extends Component{
 	@Override
 	public void teleopTick() {
 		//From PosTrack Class
+		/*
 		SmartDashboard.putNumber("distance", pos.distance);
 		SmartDashboard.putNumber("velX", pos.velX);
 		SmartDashboard.putNumber("velY", pos.velY);
@@ -30,6 +31,7 @@ public class SmartGUI extends Component{
 		SmartDashboard.putNumber("accelY", pos.aY);
 		SmartDashboard.putNumber("dt", pos.dt);
 		SmartDashboard.putNumber("t1", pos.t1);
+		*/
 		//from DriveControl Class
 		SmartDashboard.putNumber("Power", (double)((int)(100*((control.actualLeft + control.actualRight) / 2)))/100);
 //		SmartDashboard.putString("RampUp", control.rampUp);
