@@ -38,7 +38,7 @@ public class Robot extends SampleRobot {
 		state= new InputState();
 		components = new ArrayList<Component>();
 		components.add(new ElevatorControl());
-		components.add(new PosTrack());
+		//components.add(new PosTrack());
 		components.add(new DriveControl((PosTrack)(components.get(POS))));
 		components.add(new SmartGUI());
 		
