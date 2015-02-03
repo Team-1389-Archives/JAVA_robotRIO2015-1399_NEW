@@ -9,6 +9,7 @@ public class ElevatorControl extends Component{
 	//but values only update when a IR sensor is passed
 	int goToPosition = 0;
 	boolean going;
+	PosTrack pos = (PosTrack)Robot.components.get(Robot.POS);
 	
 	public void teleopConfig(){
 	}
@@ -44,6 +45,7 @@ public class ElevatorControl extends Component{
  	* @param sensors array of infared sensors
 	*/
 	public void goTo(int loc){
+		pos.teleopTick();
 		DigitalInput[] sensors=Robot.state.infared;
 		int lastSensor=0;
 		for(int d=0;d<sensors.length;d++){
@@ -55,6 +57,7 @@ public class ElevatorControl extends Component{
 		}
 	}
 	public void move(double direction){
+		
 		going=false;
 		DigitalInput[] sensors=Robot.state.infared;
 		int dir=0;

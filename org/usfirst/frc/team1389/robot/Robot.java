@@ -26,7 +26,7 @@ public class Robot extends SampleRobot {
 	static boolean isAuton;
 	static ArrayList<Component> components;
 	static InputState state;
-	final static int DRIVE=2,ELEVATOR=0,POS=1;
+	final static int DRIVE=1,ELEVATOR=0,POS=2;
 	
 	
 	/**
@@ -37,9 +37,11 @@ public class Robot extends SampleRobot {
 	{
 		state= new InputState();
 		components = new ArrayList<Component>();
-		components.add(new ElevatorControl());
+		//components.add(new ElevatorControl());
+		components.add(new CrapElevator());
+		components.add(new DriveControl());
 		//components.add(new PosTrack());
-		components.add(new DriveControl((PosTrack)(components.get(POS))));
+		//components.add(new DriveControl((PosTrack)(components.get(POS))));
 		components.add(new SmartGUI());
 		
 	}
@@ -70,7 +72,7 @@ public class Robot extends SampleRobot {
 	@Override
 	public void autonomous(){
 		isAuton=true;
-		Autonomous auton=new Autonomous(1, components);
+		new Autonomous(1, components);
 	}
 
 	/**bot into auton

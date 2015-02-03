@@ -6,15 +6,13 @@ public class DriveControl extends Component{
 	final int STRICT_COMPUTER=0;
 	final int FULL_USER=1;
 	final int COMPUTER_ASSISTED=2;
-	Talon RFDrive;
-	Talon RBDrive;
-	Talon LFDrive;
-	Talon LBDrive;
+	Victor RFDrive;
+	Victor RBDrive;
+	Victor LFDrive;
+	Victor LBDrive;
 	double leftCoef;
 	double rightCoef;
 	int rampUpState;
-	//Added rampUp String variable 2/2/2015 Daniel Park
-	String rampUp;
 	PosTrack pos;
 	int moveCount = 0;
 	int turnCount = 0;
@@ -23,17 +21,18 @@ public class DriveControl extends Component{
 	double actualLeft = 0, actualRight = 0;
 	
 	public DriveControl(PosTrack pos) {
+		this();
 		this.pos=pos;
+	}
+	public DriveControl(){
 		rampUpState=COMPUTER_ASSISTED;
-		//made rampup into null. Daniel park same date
-		rampUp="";
 		leftCoef=1;
 		rightCoef=1;
-		RFDrive = new Talon(Constants.RF_PWM_DRIVE);
-		RBDrive = new Talon(Constants.RB_PWM_DRIVE);
-		LFDrive = new Talon(Constants.LF_PWM_DRIVE);
-		LBDrive = new Talon(Constants.LB_PWM_DRIVE);
-	}	
+		RFDrive = new Victor(Constants.RF_PWM_DRIVE);
+		RBDrive = new Victor(Constants.RB_PWM_DRIVE);
+		LFDrive = new Victor(Constants.LF_PWM_DRIVE);
+		LBDrive = new Victor(Constants.LB_PWM_DRIVE);
+	}
 
 	public void drive(double x,double y){
 		
@@ -134,8 +133,7 @@ public class DriveControl extends Component{
 	@Override
 	public void teleopTick()
 	{
-		//took out String from String rampUp=null; 2/2/2015 Daniel Park
-		rampUp = null;
+		String rampUp = null;
 		switch(rampUpState){
 			case STRICT_COMPUTER:rampUp="Strict";
 			break;
@@ -160,6 +158,8 @@ public class DriveControl extends Component{
 	 */
 
 	public double move(double distance, double speed){
+		
+		pos.teleopTick();
 		if (moveCount == 0)
 		{
 			pos.resetDistance();
@@ -178,6 +178,7 @@ public class DriveControl extends Component{
 		return 0;
 	}
 	public double turn(double angle){
+		pos.teleopTick();
 		if(pos.angle>=angle)return angle;
 		else{
 			drive(0,Math.abs(angle)/angle);

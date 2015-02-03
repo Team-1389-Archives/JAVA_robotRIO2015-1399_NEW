@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SmartGUI extends Component{
 
 	private ArrayList <Component> comps = Robot.components;
-	DriveControl control = (DriveControl)comps.get(2);
-	PosTrack pos = (PosTrack)comps.get(1);
-	ElevatorControl ele = (ElevatorControl)comps.get(0);
+	DriveControl control = (DriveControl)comps.get(Robot.DRIVE);
+	//PosTrack pos = (PosTrack)comps.get(Robot.POS);
+	Component ele = comps.get(Robot.ELEVATOR);
 	
 	public SmartGUI() {
 		
@@ -16,7 +16,7 @@ public class SmartGUI extends Component{
 	
 	@Override
 	public void teleopConfig() {
-	}
+	} 
 	
 	@Override
 	public void teleopTick() {
