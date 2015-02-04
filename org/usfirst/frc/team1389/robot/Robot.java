@@ -2,6 +2,7 @@ package org.usfirst.frc.team1389.robot;
 
 import java.util.ArrayList;
 
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //Component @ in0 = DriverControl
 //Component @ in1 = ElevatorControl
 //Component @ in2 = PosTrack
-public class Robot extends SampleRobot {
+public class Robot extends IterativeRobot {
 	
 	//instance variables
 	static boolean isAuton;
@@ -38,7 +39,7 @@ public class Robot extends SampleRobot {
 		state= new InputState();
 		components = new ArrayList<Component>();
 		//components.add(new ElevatorControl());
-		components.add(new CrapElevator());
+
 		components.add(new DriveControl());
 		//components.add(new PosTrack());
 		//components.add(new DriveControl((PosTrack)(components.get(POS))));
@@ -68,22 +69,29 @@ public class Robot extends SampleRobot {
 		}
 		
 	}
-
-	@Override
-	public void autonomous(){
-		isAuton=true;
-		new Autonomous(1, components);
-	}
-
-	/**bot into auton
-	 * go forward into autonomous zone
-	 */
-	
 	/**
 	 * Autonomous configuration
 	 * Update each component through the ".autonTick()" method
 	 */
 	public static Component getComponent(int index){
 		return components.get(index);
+	}
+
+
+	@Override
+	public void autonomousInit() {
+		new Autonomous(1,components);
+	}
+	@Override
+	public void autonomousPeriodic() {
+		super.autonomousPeriodic();
+	}
+	@Override
+	public void teleopInit() {
+		super.teleopInit();
+	}
+	@Override
+	public void teleopPeriodic() {
+		super.teleopPeriodic();
 	}
 }
