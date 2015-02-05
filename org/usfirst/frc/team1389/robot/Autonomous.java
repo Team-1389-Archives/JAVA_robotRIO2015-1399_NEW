@@ -53,6 +53,7 @@ public class Autonomous {
 	}
 
 	/**
+	 * 
 	 * push a single auton crate into the autonomous zone
 	 */
 	public void autonTwo()
@@ -60,6 +61,23 @@ public class Autonomous {
 		double crateCarryDistance=(TAPE_TO_LANDMARK+STAGING_ZONE_LENGTH);
 		drive.move(crateCarryDistance,AUTON_SPEED_MOD);
 	}
+	/*
+	void autonNine(){
+		elevatorState.set(goingUp);
+		driveState.set(goingForward);
+		posTrackState.set(CheckingForDistance)
+		posTrackState.setDistance(90)
+
+	}
+	State state;
+	void autonNine1(){
+		while (IsAutonomous()){
+			switch(state){
+			case 
+			}
+		}
+	}
+	*/
 	
 	/**
 	 *collect a container and an auton tote and carry them into the auton zone 
@@ -70,7 +88,6 @@ public class Autonomous {
 		double distance2=distance1-12;
 		drive.move(distance1,AUTON_SPEED_MOD);
 		elevator.goTo(4);
-		
 		drive.move(12*MULTIPLIER,-AUTON_SPEED_MOD);
 		drive.turn(-90);
 		drive.move(TOTE_WIDTH/3, AUTON_SPEED_MOD);

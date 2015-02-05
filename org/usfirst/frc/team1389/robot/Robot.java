@@ -2,7 +2,9 @@ package org.usfirst.frc.team1389.robot;
 
 import java.util.ArrayList;
 
+
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,7 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //Component @ in0 = DriverControl
 //Component @ in1 = ElevatorControl
 //Component @ in2 = PosTrack
-public class Robot extends SampleRobot {
+public class Robot extends IterativeRobot {
 	
 	//instance variables
 	static boolean isAuton;
@@ -51,48 +53,41 @@ public class Robot extends SampleRobot {
 		components.add(new DriveControl());
 		//components.add(new PosTrack());
 		//components.add(new DriveControl((PosTrack)(components.get(POS))));
-		components.add(new SmartGUI());
-		
-	}
-	
-	
-	/**
-	 * Teleoperated configuration
-	 * Update each component each iteration through the ".teleopTick()" method
-	 */
-	public void operatorControl()
-	{
-		isAuton=false;
-		for (Component c: components){
-			
-			c.teleopConfig();
-		}
-		while (isOperatorControl())
-		{
-			state.tick();
-			
-			for (Component c: components){
-				c.teleopTick();
-			}
-		}
+		//components.add(new SmartGUI());
 		
 	}
 
-	@Override
-	public void autonomous(){
-		isAuton=true;
-		new Autonomous(1, components);
-	}
-
-	/**bot into auton
-	 * go forward into autonomous zone
-	 */
-	
 	/**
 	 * Autonomous configuration
 	 * Update each component through the ".autonTick()" method
 	 */
 	public static Component getComponent(int index){
 		return components.get(index);
+	}
+
+
+	@Override
+	public void autonomousInit() {
+		new Autonomous(1,components);
+	}
+	@Override
+	public void autonomousPeriodic() {
+		super.autonomousPeriodic();
+	}
+	@Override
+	public void teleopInit() {
+		isAuton=false;
+		for (Component c: components){
+			
+			c.teleopConfig();
+		}
+	}
+	@Override
+	public void teleopPeriodic() {
+		state.tick();
+		
+		for (Component c: components){
+			c.teleopTick();
+		}
 	}
 }

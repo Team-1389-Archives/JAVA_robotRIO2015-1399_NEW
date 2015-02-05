@@ -17,6 +17,7 @@ public class DriveControl extends Component{
 	int moveCount = 0;
 	int turnCount = 0;
 	final boolean encoderVerified=true;
+	static final float THROTTLE_TOL = 10;
 
 	double actualLeft = 0, actualRight = 0;
 	
@@ -123,6 +124,18 @@ public class DriveControl extends Component{
 		}
 	}
 	
+	
+	
+	//If joystick is close enough to full forward of for backwards, registers as completely full forward/full backwards
+	//Within a tolderance of THROTTLE_TOL
+	public float fullThrottle(float y)
+	{
+		if (Math.abs(90- Math.toDegrees(Math.atan(Robot.state.drive.getLeftY()) / Robot.state.drive.getLeftX())) < THROTTLE_TOL)
+			return 1;
+		if (Math.abs(270 - Math.toDegrees(Math.atan(Robot.state.drive.getLeftY()) / Robot.state.drive.getLeftX())) < THROTTLE_TOL)
+			return -1;
+		return y;
+	}
 
 	@Override
 	public void teleopConfig(){}
@@ -147,8 +160,9 @@ public class DriveControl extends Component{
 			rampUpState++;
 			rampUpState%=3;
 		}
-		float y = (float) Robot.state.drive.getLeftY();
-		drive(Robot.state.drive.getLeftX(), Robot.state.drive.getLeftY() * -1); 
+		float y = (float) Robot.state.drive.getLeftY() * -1;
+		//y = fullThrottle(y);
+		drive(Robot.state.drive.getLeftX(), y); 
 	}
 	
 	/**
