@@ -65,11 +65,12 @@ public class InputState implements Cloneable{
 		infared[2]= new DigitalInput(Constants.INFRARED_THREE);
 		infared[3]= new DigitalInput(Constants.INFRARED_FOUR);
 		infared[4]= new DigitalInput(Constants.INFRARED_FIVE);
-		contactSensor = new DigitalInput(Constants.CONTACT_SENSE);
+		//contactSensor = new DigitalInput(Constants.CONTACT_SENSE);
 	}
 	
 	public void tick() {
 		drive.tick();
+		manip.tick();
 	}
 
 	 

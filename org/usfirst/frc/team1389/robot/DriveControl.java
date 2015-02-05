@@ -64,7 +64,7 @@ public class DriveControl extends Component{
 		}
 
 	}
-
+	
 	/**
 	 * used in computer assisted ramp up state, uses a proportional power increase/decrease curve to allow user override
 	 * @param Power side-specific input from controller
@@ -147,6 +147,7 @@ public class DriveControl extends Component{
 			rampUpState++;
 			rampUpState%=3;
 		}
+		float y = (float) Robot.state.drive.getLeftY();
 		drive(Robot.state.drive.getLeftX(), Robot.state.drive.getLeftY() * -1); 
 	}
 	
