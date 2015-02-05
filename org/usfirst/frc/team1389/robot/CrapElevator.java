@@ -12,8 +12,8 @@ public class CrapElevator extends Component{
 		lift=new Victor(Constants.ELEVATOR_PWM);
 	}
 	public void teleopTick(){
-		lift.set(Robot.state.drive.getRightY()*Constants.ELEVATOR_SPEED_MOD);
-		SmartDashboard.putNumber("righty", Robot.state.drive.getRightY());
+		lift.set(Robot.state.manip.getRightY()*Constants.ELEVATOR_SPEED_MOD);
+		SmartDashboard.putNumber("righty", Robot.state.manip.getRightY());
 	}
 	
 }

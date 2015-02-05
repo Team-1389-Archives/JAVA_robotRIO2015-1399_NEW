@@ -123,6 +123,15 @@ public class DriveControl extends Component{
 		}
 	}
 	
+	public float fullPow(float y)
+	{
+		if (1 - Robot.state.drive.getLeftY() < .15)
+			return 1;
+		if (-1 - Robot.state.drive.getLeftY() < -.15)
+			return -1;
+		return y;
+	}
+	
 
 	@Override
 	public void teleopConfig(){}
@@ -147,7 +156,9 @@ public class DriveControl extends Component{
 			rampUpState++;
 			rampUpState%=3;
 		}
-		drive(Robot.state.drive.getLeftX(), Robot.state.drive.getLeftY() * -1); 
+		float y = (float) Robot.state.drive.getLeftY() * -1;
+		y = fullPow(y);
+		drive(Robot.state.drive.getLeftX(), y); 
 	}
 	
 	/**

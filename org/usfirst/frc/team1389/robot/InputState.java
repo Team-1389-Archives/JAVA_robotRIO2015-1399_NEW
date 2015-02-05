@@ -70,6 +70,7 @@ public class InputState implements Cloneable{
 	
 	public void tick() {
 		drive.tick();
+		manip.tick();
 	}
 
 	 

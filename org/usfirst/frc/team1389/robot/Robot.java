@@ -2,6 +2,7 @@ package org.usfirst.frc.team1389.robot;
 
 import java.util.ArrayList;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,6 +28,7 @@ public class Robot extends SampleRobot {
 	static ArrayList<Component> components;
 	static InputState state;
 	final static int DRIVE=1,ELEVATOR=0,POS=2;
+	CameraServer server;
 	
 	
 	/**
@@ -35,6 +37,14 @@ public class Robot extends SampleRobot {
 	 */
 	public Robot()
 	{
+		
+		server = CameraServer.getInstance();
+	    server.setQuality(50);
+		   //the camera name (ex "cam0") can be found through the roborio web interface
+	    server.startAutomaticCapture("cam0");
+		
+
+		
 		state= new InputState();
 		components = new ArrayList<Component>();
 		//components.add(new ElevatorControl());
