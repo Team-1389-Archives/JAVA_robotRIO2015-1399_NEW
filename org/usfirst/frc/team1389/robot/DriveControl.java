@@ -59,7 +59,7 @@ public class DriveControl extends Component{
 		}
 
 	}
-
+	
 	/**
 	 * used in computer assisted ramp up state, uses a proportional power increase/decrease curve to allow user override
 	 * @param Power side-specific input from controller
@@ -124,9 +124,9 @@ public class DriveControl extends Component{
 	//Within a tolderance of THROTTLE_TOL
 	public float fullThrottle(float y)
 	{
-		if (Math.abs(90- Math.toRadians(Math.atan(Robot.state.drive.getLeftY()) / Robot.state.drive.getLeftX())) < THROTTLE_TOL)
+		if (Math.abs(90- Math.toDegrees(Math.atan(Robot.state.drive.getLeftY()) / Robot.state.drive.getLeftX())) < THROTTLE_TOL)
 			return 1;
-		if (Math.abs(270 - Math.toRadians(Math.atan(Robot.state.drive.getLeftY()) / Robot.state.drive.getLeftX())) < THROTTLE_TOL)
+		if (Math.abs(270 - Math.toDegrees(Math.atan(Robot.state.drive.getLeftY()) / Robot.state.drive.getLeftX())) < THROTTLE_TOL)
 			return -1;
 		return y;
 	}
@@ -155,7 +155,7 @@ public class DriveControl extends Component{
 			rampUpState%=3;
 		}
 		float y = (float) Robot.state.drive.getLeftY() * -1;
-		y = fullThrottle(y);
+		//y = fullThrottle(y);
 		drive(Robot.state.drive.getLeftX(), y); 
 	}
 	

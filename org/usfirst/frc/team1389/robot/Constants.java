@@ -46,18 +46,18 @@ public class Constants {
 	static final int MANIP_JOY            = 1;
 	
 	//IR Sensor Digital Ports
-	static final int INFRARED_ONE         = 3;
-	static final int INFRARED_TWO         = 4;
-	static final int INFRARED_THREE       = 5;
-	static final int INFRARED_FOUR        = 6;
-	static final int INFRARED_FIVE        = 7;
-	static final int CONTACT_SENSE        = 2;
+	static final int INFRARED_ONE         = 0;
+	static final int INFRARED_TWO         = 1;
+	static final int INFRARED_THREE       = 2;
+	static final int INFRARED_FOUR        = 3;
+	static final int INFRARED_FIVE        = 4;
+	//static final int CONTACT_SENSE        = 2;
 	
 	//Encoder Digital Ports
-	static final int ENCODER_1A           = 8;
-	static final int ENCODER_1B           = 9;
-	static final int ENCODER_2A           = 10;
-	static final int ENCODER_2B           = 11;
+	static final int ENCODER_1A           = 7;
+	static final int ENCODER_1B           = 6;
+	static final int ENCODER_2A           = 8;
+	static final int ENCODER_2B           = 9;
 
 	//Values
 	static final float LIMITER            = (float) 1.42; //Approximately sqrt(2)
