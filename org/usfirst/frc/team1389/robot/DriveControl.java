@@ -6,10 +6,8 @@ public class DriveControl extends Component{
 	final int STRICT_COMPUTER=0;
 	final int FULL_USER=1;
 	final int COMPUTER_ASSISTED=2;
-	Victor RFDrive;
-	Victor RBDrive;
-	Victor LFDrive;
-	Victor LBDrive;
+	Victor rightDrive;
+	Victor leftDrive;
 	double leftCoef;
 	double rightCoef;
 	int rampUpState;
@@ -29,10 +27,8 @@ public class DriveControl extends Component{
 		rampUpState=COMPUTER_ASSISTED;
 		leftCoef=1;
 		rightCoef=1;
-		RFDrive = new Victor(Constants.RF_PWM_DRIVE);
-		RBDrive = new Victor(Constants.RB_PWM_DRIVE);
-		LFDrive = new Victor(Constants.LF_PWM_DRIVE);
-		LBDrive = new Victor(Constants.LB_PWM_DRIVE);
+		rightDrive = new Victor(Constants.RIGHT_PWM_DRIVE);
+		leftDrive = new Victor(Constants.LEFT_PWM_DRIVE);
 	}
 
 	public void drive(double x,double y){
@@ -53,10 +49,8 @@ public class DriveControl extends Component{
 			actualRight=rightPower;
 		}
 
-		LFDrive.set(actualLeft);
-		LBDrive.set(actualLeft);
-		RFDrive.set(actualRight);
-		RBDrive.set(actualRight);
+		leftDrive.set(actualLeft);
+		rightDrive.set(actualRight);
 
 		if(encoderVerified){
 			VerifyVelocity(leftPower, rightPower, Robot.state.encoder1, Robot.state.encoder2);
