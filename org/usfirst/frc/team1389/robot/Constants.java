@@ -40,6 +40,7 @@ public class Constants {
 	static final int RIGHT_PWM_DRIVE         = 0;
 	static final int LEFT_PWM_DRIVE         = 1;
 	static final int ELEVATOR_PWM         = 2;
+	static final int CENTER_PWM 			= 3;
 	
 	//Joystick USB ports
 	static final int DRIVE_JOY            = 0;
