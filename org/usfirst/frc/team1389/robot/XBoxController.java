@@ -83,7 +83,7 @@ public class XBoxController implements Cloneable{
 		return BPressed;
 	}
 	public boolean isAPressed(){
-		return BPressed;
+		return APressed;
 	}
 	public boolean isPressed(boolean oldState, boolean currentState){
 		SmartDashboard.putBoolean("Pressed",oldState&&(!currentState));

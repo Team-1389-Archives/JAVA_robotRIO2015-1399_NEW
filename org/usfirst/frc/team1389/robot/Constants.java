@@ -53,6 +53,7 @@ public class Constants {
 	static final int INFRARED_THREE       = 2;
 	static final int INFRARED_FOUR        = 3;
 	static final int INFRARED_FIVE        = 4;
+	static final int INFRARED_SIX         = 5;
 	//static final int CONTACT_SENSE        = 2;
 	
 	//Encoder Digital Ports

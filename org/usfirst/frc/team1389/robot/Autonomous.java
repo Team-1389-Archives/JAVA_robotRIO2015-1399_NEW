@@ -87,11 +87,11 @@ public class Autonomous {
 		double distance1=TAPE_TO_DRIVER-13.5;
 		double distance2=distance1-12;
 		drive.move(distance1,AUTON_SPEED_MOD);
-		elevator.goTo(4);
+		//elevator.goTo(4);
 		drive.move(12*MULTIPLIER,-AUTON_SPEED_MOD);
 		drive.turn(-90);
 		drive.move(TOTE_WIDTH/3, AUTON_SPEED_MOD);
-		elevator.goTo(0);
+		//elevator.goTo(0);
 		drive.turn(-90);
 		drive.move(distance2, AUTON_SPEED_MOD);
 		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);		
@@ -103,7 +103,7 @@ public class Autonomous {
 	public void autonFour()
 	{
 		drive.move(LANDFILL_TO_SCORING, -AUTON_SPEED_MOD);
-		elevator.goTo(2);
+		//elevator.goTo(2);
 		drive.move(LANDFILL_TO_AUTON, -AUTON_SPEED_MOD);
 	}
 	
@@ -119,7 +119,7 @@ public class Autonomous {
 		drive.turn(-90);
 		drive.move(AUTONTOTE_TO_LANDFILLTOTE,AUTON_SPEED_MOD);
 		drive.turn(90);
-		elevator.goTo(2);
+		//elevator.goTo(2);
 		drive.move(distance2,AUTON_SPEED_MOD);
 		autonFour();
 	}
@@ -134,9 +134,9 @@ public class Autonomous {
 		double distance2=OVERHANG;
 		for(int x=1;x<=2;x++){
 		drive.move(OVERHANG, AUTON_SPEED_MOD);
-		elevator.goTo(0);
+		//elevator.goTo(0);
 		
-		elevator.goTo(1);
+		//elevator.goTo(1);
 		drive.turn(angle);
 		drive.move(distance1, AUTON_SPEED_MOD);
 		drive.turn(angle-90);
@@ -144,8 +144,8 @@ public class Autonomous {
 		drive.turn(-angle);
 		}
 		drive.move(OVERHANG, AUTON_SPEED_MOD);
-		elevator.goTo(0);
-		elevator.goTo(1);
+		//elevator.goTo(0);
+		//elevator.goTo(1);
 		drive.turn(-90);
 		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
 
@@ -159,7 +159,7 @@ public class Autonomous {
 		double distance1=TAPE_TO_DRIVER-OVERHANG;
 		double distance2=distance1-12+TAPE_TO_LANDMARK;
 		drive.move(distance1,AUTON_SPEED_MOD);
-		elevator.goTo(5);
+		//elevator.goTo(5);
 		
 		drive.move(12*MULTIPLIER,-AUTON_SPEED_MOD);
 		drive.turn(90);
@@ -173,17 +173,17 @@ public class Autonomous {
 	 */
 	public void autonEight()
 	{
-		elevator.goTo(1);
+		//elevator.goTo(1);
 		
 		drive.move(BETW_AUTO_TOTES, AUTON_SPEED_MOD);
-		elevator.goTo(0);
+		//elevator.goTo(0);
 		
-		elevator.goTo(1);
+		//elevator.goTo(1);
 		
 		drive.move(BETW_AUTO_TOTES * MULTIPLIER, AUTON_SPEED_MOD);
-		elevator.goTo(0);
+		//elevator.goTo(0);
 		
-		elevator.goTo(1);
+		//elevator.goTo(1);
 		
 		drive.turn(-90);
 		drive.move(TAPE_TO_LANDMARK, AUTON_SPEED_MOD);
