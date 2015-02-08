@@ -37,10 +37,11 @@ public class Constants {
 	static final int RightX				  = 4; // XBox Controller Right X Axis number
 
 	//Motor PWM ports
-	static final int RIGHT_PWM_DRIVE         = 0;
-	static final int LEFT_PWM_DRIVE         = 1;
-	static final int ELEVATOR_PWM         = 2;
-	static final int CENTER_PWM 			= 3;
+	static final int RIGHT_PWM_DRIVE          = 0;
+	static final int LEFT_PWM_DRIVE           = 1;
+	static final int ELEVATOR_ONE_PWM         = 2;
+	static final int ELEVATOR_TWO_PWM         = 3;
+	static final int CENTER_PWM 			  = 4;
 	
 	//Joystick USB ports
 	static final int DRIVE_JOY            = 0;

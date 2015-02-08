@@ -10,7 +10,7 @@ public class DriveControl extends Component{
 	Victor leftDrive;
 	double leftCoef;
 	double rightCoef;
-	int rampUpState;
+	static int rampUpState;
 	PosTrack pos;
 	int moveCount = 0;
 	int turnCount = 0;
@@ -154,9 +154,9 @@ public class DriveControl extends Component{
 			rampUpState++;
 			rampUpState%=3;
 		}
-		float y = (float) Robot.state.drive.getLeftY() * -1;
+		float y = (float) Robot.state.drive.getLeftY();
 		//y = fullThrottle(y);
-		drive(Robot.state.drive.getLeftX(), y); 
+		drive(y, Robot.state.drive.getLeftX()); 
 	}
 	
 	/**
