@@ -10,7 +10,6 @@ public class HolonomicDrive extends DriveControl{
 		
 	}
 	
-	
 	@Override
 	public void drive(double x, double y) {
 		centerMotor.set(Robot.state.drive.getRightX());
