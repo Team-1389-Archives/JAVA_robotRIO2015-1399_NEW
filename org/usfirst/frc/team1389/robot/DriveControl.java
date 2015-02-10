@@ -16,7 +16,7 @@ public class DriveControl extends Component{
 	PosTrack pos;
 	int moveCount = 0;
 	int turnCount = 0;
-	final boolean encoderVerified=true;
+	final boolean encoderVerified=false;
 
 	double actualLeft = 0, actualRight = 0;
 	
@@ -157,7 +157,7 @@ public class DriveControl extends Component{
 			rampUpState%=3;
 		}
 		float y = (float) Robot.state.drive.getLeftY() * -1;
-		y = fullPow(y);
+		//y = fullPow(y);
 		drive(Robot.state.drive.getLeftX(), y); 
 	}
 	
