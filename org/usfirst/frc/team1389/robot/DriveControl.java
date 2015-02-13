@@ -156,7 +156,7 @@ public class DriveControl extends Component{
 		}
 		float y = (float) Robot.state.drive.getLeftY();
 		//y = fullThrottle(y);
-		drive(y, Robot.state.drive.getLeftX()); 
+		drive(Robot.state.drive.getLeftX(), y); 
 	}
 	
 	/**

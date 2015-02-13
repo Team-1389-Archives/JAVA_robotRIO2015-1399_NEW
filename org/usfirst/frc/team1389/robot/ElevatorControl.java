@@ -12,9 +12,9 @@ public class ElevatorControl extends Component{
 	boolean going;
 	int direction;
 	//PosTrack pos = (PosTrack)Robot.components.get(Robot.POS);
-	DigitalInput IRa, IRb, IRc, IRd, IRe, IRf;
-	boolean [] lastSense = new boolean [6];
-	boolean []sense = new boolean [6];
+	DigitalInput IRa, IRb, IRc, IRd, IRe;
+	boolean [] lastSense = new boolean [5];
+	boolean []sense = new boolean [5];
 
 	public ElevatorControl() {
 		IRa = new DigitalInput (Constants.INFRARED_ONE);
@@ -22,8 +22,6 @@ public class ElevatorControl extends Component{
 		IRc = new DigitalInput (Constants.INFRARED_THREE);
 		IRd = new DigitalInput (Constants.INFRARED_FOUR);
 		IRe = new DigitalInput (Constants.INFRARED_FIVE);
-		IRf = new DigitalInput (Constants.INFRARED_SIX);
-
 	}
 
 
@@ -34,26 +32,25 @@ public class ElevatorControl extends Component{
 
 
 	public void teleopConfig(){
-		lastSense[0] = !IRa.get();  lastSense[0] = !IRb.get();  lastSense[0] = !IRc.get(); lastSense[0] = !IRd.get(); lastSense[0] = !IRe.get();  lastSense[0] = !IRf.get();
+		lastSense[0] = !IRa.get();  lastSense[0] = !IRb.get();  lastSense[0] = !IRc.get(); lastSense[0] = !IRd.get(); lastSense[0] = !IRe.get();
 	}
 	@Override
 	public void teleopTick(){
-		sense[0] = !IRa.get(); sense[1] = !IRb.get(); sense[2] = !IRc.get(); sense[3] = !IRd.get(); sense[4] = !IRe.get(); sense[5] = !IRf.get();
+		sense[0] = !IRa.get(); sense[1] = !IRb.get(); sense[2] = !IRc.get(); sense[3] = !IRd.get(); sense[4] = !IRe.get();
 		if (!IRa.get() || !IRb.get() || !IRc.get() || !IRd.get() || !IRe.get())
 		{
-			lastSense[0] = !IRa.get(); lastSense[1] = !IRb.get(); lastSense[2] = !IRc.get(); lastSense[3] = !IRd.get(); lastSense[4] = !IRe.get(); lastSense[5] = !IRf.get();
+			lastSense[0] = !IRa.get(); lastSense[1] = !IRb.get(); lastSense[2] = !IRc.get(); lastSense[3] = !IRd.get(); lastSense[4] = !IRe.get();
 		}
 
-
-		if (Robot.state.manip.getLeftY() > .4 && !sense[5])
+		if (Robot.state.manip.getLeftY() > .2 && !sense[4])
 		{
 			direction = 1;
-			elevator.set(direction * Constants.ELEVATOR_SPEED_MOD);
+			elevator.set(direction * Robot.state.manip.getLeftY());
 		}
-		if (Robot.state.manip.getLeftY() < -.4 && !sense[0])
+		if (Robot.state.manip.getLeftY() < -.2 && !sense[0])
 		{
 			direction = -1;
-			elevator.set(direction * Constants.ELEVATOR_SPEED_MOD);
+			elevator.set(direction * Robot.state.manip.getLeftY() * -1);
 		}
 		if (Robot.state.manip.isButtonA() && !sense[1])
 		{
@@ -71,11 +68,6 @@ public class ElevatorControl extends Component{
 			elevator.set(direction * Constants.ELEVATOR_SPEED_MOD);
 		}
 		
-		if (Robot.state.manip.isButtonY() && !sense[4])
-		{
-			direction = getDirection(4);
-			elevator.set(direction * Constants.ELEVATOR_SPEED_MOD);
-		}
 
 	}
 

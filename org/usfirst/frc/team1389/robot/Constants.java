@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1389.robot;
 
 
@@ -35,7 +34,7 @@ public class Constants {
 	static final int RightTrigger	      = 4; // XBox Controller  Right Trigger Axis number
 	static final int RightY			 	  = 5; // XBox Controller Right Y Axis number
 	static final int RightX				  = 4; // XBox Controller Right X Axis number
-
+	
 	//Motor PWM ports
 	static final int RIGHT_PWM_DRIVE          = 0;
 	static final int LEFT_PWM_DRIVE           = 1;
@@ -54,7 +53,7 @@ public class Constants {
 	static final int INFRARED_FOUR        = 3;
 	static final int INFRARED_FIVE        = 4;
 	static final int INFRARED_SIX         = 5;
-	//static final int CONTACT_SENSE        = 2;
+	static final int CONTACT_SENSE        = 2;
 	
 	//Encoder Digital Ports
 	static final int ENCODER_1A           = 7;

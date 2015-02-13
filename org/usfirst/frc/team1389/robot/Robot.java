@@ -78,7 +78,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		state.tick();
-		
+		SmartDashboard.putNumber("encoder value", state.encoder1.getRate());
 		for (Component c: components){
 			c.teleopTick();
 		}
