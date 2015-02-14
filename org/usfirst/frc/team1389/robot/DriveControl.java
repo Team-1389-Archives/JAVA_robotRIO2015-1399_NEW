@@ -37,14 +37,17 @@ public class DriveControl extends Component{
 		double rightPower=(y - x) / Constants.LIMITER * -1;
 
 		if(rampUpState==COMPUTER_ASSISTED){
+			SmartDashboard.putString("mode", "computer assisted");
 			actualLeft=AssistedPowerControl(leftPower,actualLeft);
 			actualRight=AssistedPowerControl(rightPower,actualRight);
 		}
 		else if(rampUpState==STRICT_COMPUTER){
+			SmartDashboard.putString("mode", "Strict Computer");
 			actualLeft=PowerControl(leftPower,actualLeft);
 			actualRight=PowerControl(rightPower,actualRight);
 		}
 		else{
+			SmartDashboard.putString("mode", "user");
 			actualLeft=leftPower;
 			actualRight=rightPower;
 		}
@@ -120,7 +123,7 @@ public class DriveControl extends Component{
 	
 	
 	
-	//If joystick is close enough to full forward of for backwards, registers as completely full forward/full backwards
+	//If joystick is close enough to ful l forward of for backwards, registers as completely full forward/full backwards
 	//Within a tolderance of THROTTLE_TOL
 	public float fullThrottle(float y)
 	{
@@ -154,7 +157,7 @@ public class DriveControl extends Component{
 			rampUpState++;
 			rampUpState%=3;
 		}
-		float y = (float) Robot.state.drive.getLeftY();
+		float y = (float) Robot.state.drive.getLeftY() * -1;
 		//y = fullThrottle(y);
 		drive(Robot.state.drive.getLeftX(), y); 
 	}

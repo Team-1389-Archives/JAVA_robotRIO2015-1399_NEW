@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1389.robot;
 
+import java.util.ArrayList;
+
 import edu.wpi.first.wpilibj.AnalogAccelerometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -29,7 +31,7 @@ public class InputState implements Cloneable{
 
 	public Timer time;
 	
-	public DigitalInput[] infared;
+	public ArrayList<DigitalInput> infared;
 	public DigitalInput contactSensor;
 	
 	public InputState(){
@@ -55,17 +57,12 @@ public class InputState implements Cloneable{
 		encoder1 = new Encoder(Constants.ENCODER_1A,Constants.ENCODER_1B);
 		encoder2 = new Encoder(Constants.ENCODER_2A,Constants.ENCODER_2B);
 		
-		//limit1 = new DigitalInput(Constants.LIMIT_ONE);
-		//limit2 = new DigitalInput(Constants.LIMIT_TWO);
-		
-		infared = new DigitalInput[5];
-		
-		infared[0]= new DigitalInput(Constants.INFRARED_ONE);
-		infared[1]= new DigitalInput(Constants.INFRARED_TWO);
-		infared[2]= new DigitalInput(Constants.INFRARED_THREE);
-		infared[3]= new DigitalInput(Constants.INFRARED_FOUR);
-		infared[4]= new DigitalInput(Constants.INFRARED_FIVE);
-		//contactSensor = new DigitalInput(Constants.CONTACT_SENSE);
+		infared = new ArrayList<DigitalInput>();
+		infared.add(new DigitalInput(Constants.INFRARED_ONE));
+		infared.add(new DigitalInput(Constants.INFRARED_TWO));
+		infared.add(new DigitalInput(Constants.INFRARED_THREE));
+		infared.add(new DigitalInput(Constants.INFRARED_FOUR));
+		infared.add(new DigitalInput(Constants.INFRARED_FIVE));
 	}
 	
 	public void tick() {

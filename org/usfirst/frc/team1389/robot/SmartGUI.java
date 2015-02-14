@@ -37,7 +37,7 @@ public class SmartGUI extends Component{
 //		SmartDashboard.putString("RampUp", control.rampUp);
 		SmartDashboard.putNumber("state", control.rampUpState);
 		//Elevator control class
-		SmartDashboard.putBoolean("IR One value", Robot.state.infared[0].get());
+		SmartDashboard.putBoolean("IR One value", Robot.state.infared.get(0).get());
 		
 	}
 	

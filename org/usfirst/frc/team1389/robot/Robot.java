@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 		state= new InputState();
 		components = new ArrayList<Component>();
 		//components.add(new ElevatorControl());
-		components.add(new CrapElevator());
+		components.add(new JacobElevator());
 		components.add(new DriveControl());
 		//components.add(new PosTrack());
 		//components.add(new DriveControl((PosTrack)(components.get(POS))));
