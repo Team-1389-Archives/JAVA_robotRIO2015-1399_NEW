@@ -8,8 +8,7 @@ public class JacobAriElevatorCoeficientColliderUnicornCramberryGazpacho extends 
 	Victor liftOne;
 	Victor liftTwo;
 		
-	int lastSeen;
-	int position;
+	int lastSeenWorstGuess; //code's worst guess at where the elevator is, worst so that it always corrects
 	boolean isTouching;
 	
 	int wanted;
@@ -25,7 +24,7 @@ public class JacobAriElevatorCoeficientColliderUnicornCramberryGazpacho extends 
 		liftTwo=new Victor(Constants.ELEVATOR_TWO_PWM);
 	}
 	public void teleopConfig(){
-		lastSeen = 0;
+		lastSeenWorstGuess = 0;
 		isTouching = false;
 		wanted = 0;
 	}
@@ -47,7 +46,7 @@ public class JacobAriElevatorCoeficientColliderUnicornCramberryGazpacho extends 
 			break;
 		}
 				
-		SmartDashboard.putNumber("last seen", lastSeen);
+		SmartDashboard.putNumber("last seen", lastSeenWorstGuess);
 		SmartDashboard.putBoolean("isTouching", isTouching);
 		SmartDashboard.putNumber("wanted", wanted);
 	}
@@ -56,25 +55,19 @@ public class JacobAriElevatorCoeficientColliderUnicornCramberryGazpacho extends 
 		isTouching = false;
 		for (int i = 0; i < Robot.state.infared.size(); ++i){
 			if (!Robot.state.infared.get(i).get()){
-				lastSeen = i;
+				lastSeenWorstGuess = i;
 				isTouching = true;
 			}
 		}
 	}
 	
 	private void updateUserInput(){
-		if (Robot.state.manip.isAPressed()){
+		if (Robot.state.manip.isAPressed() && wanted < Robot.state.infared.size()){
 			++wanted;
-		} else if (Robot.state.manip.isBPressed()){
+			-- lastSeenWorstGuess; // no longer sure that it is in the correct place so it has to reflect that by making it's guess at where it is worse
+		} else if (Robot.state.manip.isBPressed() && wanted != 0){
 			--wanted;
-		}
-		
-		if (wanted < 0){
-			wanted = 0;
-		}
-		
-		if (wanted >= Robot.state.infared.size()){
-			wanted = Robot.state.infared.size();
+			++lastSeenWorstGuess;
 		}
 	}
 	
@@ -98,9 +91,9 @@ public class JacobAriElevatorCoeficientColliderUnicornCramberryGazpacho extends 
 			
 		}*/
 		
-		if (lastSeen < lowerSensor || lastSeen == lowerSensor && isTouching){
+		if (lastSeenWorstGuess < lowerSensor || lastSeenWorstGuess == lowerSensor && isTouching){
 			return Movement.UP;
-		} else if (lastSeen > upperSensor || lastSeen == upperSensor && isTouching){
+		} else if (lastSeenWorstGuess > upperSensor || lastSeenWorstGuess == upperSensor && isTouching){
 			return Movement.DOWN;
 		} else {
 			return Movement.STOP;
