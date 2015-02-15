@@ -4,29 +4,49 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class JacobElevator extends Component{
+public class JacobAriElevatorCoeficientColliderUnicornCramberryGazpacho extends Component{
 	Victor liftOne;
 	Victor liftTwo;
-	
-	DigitalInput[] IRs;
-	
+		
 	int lastSeen;
+	int position;
 	boolean isTouching;
 	
 	int wanted;
 	
-	public JacobElevator(){
+	enum Movement{
+		UP,
+		DOWN,
+		STOP
+	}
+	
+	public JacobAriElevatorCoeficientColliderUnicornCramberryGazpacho(){
 		liftOne=new Victor(Constants.ELEVATOR_ONE_PWM);
 		liftTwo=new Victor(Constants.ELEVATOR_TWO_PWM);
 	}
 	public void teleopConfig(){
 		lastSeen = 0;
 		isTouching = false;
+		wanted = 0;
 	}
 	public void teleopTick(){
 		updateSensors();
 		updateUserInput();
-		move();
+		switch(move()){
+		case UP:
+			goUp();
+			SmartDashboard.putString("intended direction", "UP");
+			break;
+		case DOWN:
+			goDown();
+			SmartDashboard.putString("intended direction", "DOWN");
+			break;
+		case STOP:
+			stop();
+			SmartDashboard.putString("intended direction", "STOP");
+			break;
+		}
+				
 		SmartDashboard.putNumber("last seen", lastSeen);
 		SmartDashboard.putBoolean("isTouching", isTouching);
 		SmartDashboard.putNumber("wanted", wanted);
@@ -54,36 +74,51 @@ public class JacobElevator extends Component{
 		}
 		
 		if (wanted >= Robot.state.infared.size()){
-			wanted = Robot.state.infared.size() - 1;
+			wanted = Robot.state.infared.size();
 		}
 	}
 	
-	private void move(){
-		if (lastSeen < wanted){
-			goUp();
-		} else if (lastSeen > wanted) {
-			goDown();
-		} else { //lastSeen == wanted
-			if (!isTouching){
-				goUp();
-			} else {
-				stop();
+	private Movement move(){//untested
+		int lowerSensor = wanted - 1;
+		int upperSensor = wanted;
+		/*if (lastSeen < lowerSensor){
+			return Movement.UP;
+		} else if (lastSeen > upperSensor) {
+			return Movement.DOWN;
+		} else { //lastSeen == upperSensor || lastSeen == lowerSensor
+			if (isTouching){
+				if (lastSeen == lowerSensor){
+					return Movement.UP;
+				} else { //lastSeen == upperSensor
+					return Movement.DOWN;
+				}
+			}else{
+				return Movement.STOP;
 			}
+			
+		}*/
+		
+		if (lastSeen < lowerSensor || lastSeen == lowerSensor && isTouching){
+			return Movement.UP;
+		} else if (lastSeen > upperSensor || lastSeen == upperSensor && isTouching){
+			return Movement.DOWN;
+		} else {
+			return Movement.STOP;
 		}
 	}
-	
+
 	private void setMotors(double speed){
 		liftOne.set(speed * Constants.ELEVATOR_SPEED_MOD * -1);
 		liftTwo.set(speed * Constants.ELEVATOR_SPEED_MOD);
 	}
 	
 	private void goUp(){
-		setMotors(.75);
+		setMotors(1);
 	}
 	private void goDown(){
 		setMotors(-.3);
 	}
 	private void stop(){ 
-		setMotors(.05);
+		setMotors(.3);
 	}
 }

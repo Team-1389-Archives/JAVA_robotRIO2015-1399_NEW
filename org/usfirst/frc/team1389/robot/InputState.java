@@ -62,7 +62,6 @@ public class InputState implements Cloneable{
 		infared.add(new DigitalInput(Constants.INFRARED_TWO));
 		infared.add(new DigitalInput(Constants.INFRARED_THREE));
 		infared.add(new DigitalInput(Constants.INFRARED_FOUR));
-		infared.add(new DigitalInput(Constants.INFRARED_FIVE));
 	}
 	
 	public void tick() {

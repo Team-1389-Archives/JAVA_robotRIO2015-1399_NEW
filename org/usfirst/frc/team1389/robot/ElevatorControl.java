@@ -24,7 +24,7 @@ public class ElevatorControl extends Component{
 		IRb = new DigitalInput (Constants.INFRARED_TWO);
 		IRc = new DigitalInput (Constants.INFRARED_THREE);
 		IRd = new DigitalInput (Constants.INFRARED_FOUR);
-		IRe = new DigitalInput (Constants.INFRARED_FIVE);
+		//IRe = new DigitalInput (Constants.INFRARED_FIVE);
 	}
 
 
